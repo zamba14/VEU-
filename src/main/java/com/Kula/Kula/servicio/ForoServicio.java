@@ -84,9 +84,23 @@ public class ForoServicio {
     // tituloExiste recibe el nuevo título y devuelve verdadero si existe el título 
 
     public boolean tituloExiste(String titulo) {
-        Boolean existe = false;
-        Optional<Foro> respuesta = foroRepositorio.buscarporTitulo(titulo);
-        existe= respuesta.isPresent();
-        return existe;
+        boolean existe = false;
+        Foro respuesta= foroRepositorio.buscarPorTitulo(titulo);
+        return existe=respuesta!=null;
+      
     }
+    //nuevaCategoria el usuario ingresa una nueva categoría consultar qué hacemos con las nuevas ccategorías
+    //
+    
+    // listaModeradoresValida recibe lista de moderadores y devuelve si es valida o no de acuerdo si se encuentran  las alias. 
+    // 
+    
+    
+    public boolean esModerador(String idUsuario,String idForo){
+         boolean existe=false;
+        
+         
+         return existe;
+    }
+    
 }
