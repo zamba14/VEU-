@@ -67,17 +67,23 @@ public class ForoServicio {
     }
 
     private void validar(String titulo, List<Categoria> tema, String descripcion, List<Publicacion> publicaciones) throws ErrorServicio {
+        String error="";
         if (titulo == null || titulo.isEmpty()) {
-            throw new ErrorServicio("El titulo no puede estar vacio.");
+            error=error+"El titulo no puede estar vacio.\n";
         }
         if (tema == null || tema.isEmpty()) {
-            throw new ErrorServicio("El tema no puede ser nulo.");
+            error=error+"El tema no puede ser nulo.\n";
         }
         if (descripcion == null || descripcion.isEmpty()) {
-            throw new ErrorServicio("La descripcion no puede estar vacio.");
+            error=error+"La descripcion no puede estar vacio.\n";
         }
         if (publicaciones == null || publicaciones.isEmpty()) {
-            throw new ErrorServicio("La publicacion no puede estar vacio.");
+            error=error+"La publicacion no puede estar vacio.";
         }
+        if(!error.equals("")){
+            throw new ErrorServicio(error);
+        }
+        
+    
     }
 }
