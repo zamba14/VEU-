@@ -29,7 +29,7 @@ public class ForoServicio {
         foro.setPublicaciones(publicaciones);
         foro.setModerador(moderadores);
         foro.setEstado(true);
-        
+
         foroRepositorio.save(foro);
     }
 
@@ -52,7 +52,7 @@ public class ForoServicio {
             throw new ErrorServicio("No existe un usario con este id.");
         }
     }
-    
+
     @Transactional
     public void eliminarForo(String id) throws ErrorServicio {
         Optional<Foro> localizar = foroRepositorio.findById(id);
@@ -79,5 +79,14 @@ public class ForoServicio {
         if (publicaciones == null || publicaciones.isEmpty()) {
             throw new ErrorServicio("La publicacion no puede estar vacio.");
         }
+
+    }
+    // tituloExiste recibe el nuevo título y devuelve verdadero si existe el título 
+
+    public boolean tituloExiste(String titulo) {
+        Boolean existe = false;
+        Optional<Foro> respuesta = foroRepositorio.buscarporTitulo(titulo);
+        existe= respuesta.isPresent();
+        return existe;
     }
 }
