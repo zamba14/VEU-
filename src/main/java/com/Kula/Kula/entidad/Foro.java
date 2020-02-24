@@ -21,6 +21,15 @@ public class Foro {
     private String titulo;
     private List<Categoria> tema;
     private String descripcion;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+    private String color;
     
     @ManyToOne
     private List<Publicacion> publicaciones;
