@@ -28,7 +28,16 @@ public class Foro {
     @ManyToMany
     private List<Usuario> moderador;
     
+    private String color;
     private boolean estado;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public boolean isEstado() {
         return estado;
