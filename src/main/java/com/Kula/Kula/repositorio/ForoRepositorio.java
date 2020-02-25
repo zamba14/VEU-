@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ForoRepositorio extends JpaRepository <Foro, String> {
     
-    @Query("SELECT c FROM Foro c WHERE c.titulo = :titulo ")
+    @Query("SELECT c FROM Foro c WHERE c.titulo = :titulo")
     public Foro buscarPorTitulo(@Param("titulo") String tilulo);
     
 }

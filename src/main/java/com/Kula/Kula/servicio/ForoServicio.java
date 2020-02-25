@@ -12,6 +12,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 public class ForoServicio {
 
@@ -19,9 +21,9 @@ public class ForoServicio {
     ForoRepositorio foroRepositorio;
 
     @Transactional
-    public void guardarForo(String titulo, List<Categoria> tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores) throws ErrorServicio {
+    public void guardarForo(String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores) throws ErrorServicio {
         Foro foro = new Foro();
-        
+
         validar(titulo, tema, descripcion, publicaciones);
         //buscarModerador(moderadores);
 
@@ -36,7 +38,7 @@ public class ForoServicio {
     }
 
     @Transactional
-    public void modificarForo(String id, String titulo, List<Categoria> tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores) throws ErrorServicio {
+    public void modificarForo(String id, String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores) throws ErrorServicio {
         validar(titulo, tema, descripcion, publicaciones);
 
         Optional<Foro> localizar = foroRepositorio.findById(id);
@@ -68,12 +70,12 @@ public class ForoServicio {
         }
     }
 
-    private void validar(String titulo, List<Categoria> tema, String descripcion, List<Publicacion> publicaciones) throws ErrorServicio {
+    private void validar(String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones) throws ErrorServicio {
         String error="";
         if (titulo == null || titulo.isEmpty()) {
             error=error+"El titulo no puede estar vacio.\n";
         }
-        if (tema == null || tema.isEmpty()) {
+        if (tema == null ) {
             error=error+"El tema no puede ser nulo.\n";
         }
         if (descripcion == null || descripcion.isEmpty()) {
@@ -88,5 +90,24 @@ public class ForoServicio {
         
     
     }
+        // tituloExiste recibe el nuevo título y devuelve verdadero si existe el título 
+
+    public boolean tituloExiste(String titulo) {
+        boolean existe = false;
+        Foro respuesta = foroRepositorio.buscarPorTitulo(titulo);
+        return existe = respuesta != null;
+
+    }
+    //nuevaCategoria el usuario ingresa una nueva categoría consultar qué hacemos con las nuevas ccategorías
+    //
+
+    // listaModeradoresValida recibe lista de moderadores y devuelve si es valida o no de acuerdo si se encuentran  las alias. 
+    // 
+    public boolean esModerador(String idUsuario, String idForo) {
+        boolean existe = false;
+
+        return existe;
+    }
 
 }
+
