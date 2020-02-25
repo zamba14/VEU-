@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 
-
+  <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
     <title>VEU!</title>
   </head>
   <body>
@@ -31,7 +31,7 @@
     <br/>
     <br/>
 
-<div th:insert="forms :: nuevoForo">...</div>
+
    
     <div class="container" th:fragment="listaforos">   
   <div class="card-deck mt-3" th:each="foro:${preferencia}">
@@ -43,7 +43,7 @@
         <p class="card-text" th:text="${foro.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lectus sem, 
                               tempor vitae mattis malesuada, ornare sed erat. Pellentesque nulla dui, congue
                               nec tortor sit amet, maximus mattis dui. </p>
-        <a href="'/foro?idForo='+${foro.id}" class="btn btn-warning">Entrar</a>
+        <a th:href="'/foro?idForo='+${foro.id}" class="btn btn-warning">Entrar</a>
       </div>
     </div>          
 

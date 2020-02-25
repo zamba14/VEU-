@@ -43,6 +43,7 @@ public class Foro {
 
     public boolean isEstado() {
         return estado;
+       
     }
 
     public void setEstado(boolean estado) {

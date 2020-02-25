@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-
+    <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
 
     <title>VEU!</title>
   </head>
@@ -31,19 +31,27 @@
     <br/>
     <br/>
 
-<div th:insert="forms :: nuevoForo">...</div>
+    <section th:style="|background-color: ${foro.color}|">
+        <div class="card-deck mt-4">
+            <div class="card text-center border-info" >
+        <h1 th:text="${foro.titulo}">Titulo</h1>
+        <h2 th:text="${foro.tema}">Tema</h2>
+        <h4 th:text="${foro.descripcion}">Descripción</h4>
+    </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div th:insert="forms :: nuevoPost">...</div>
    
-    <div class="container" th:fragment="listaforos">   
-  <div class="card-deck mt-3" th:each="foro:${preferencia}">
+    <div class="container" th:fragment="listapublicaciones">   
+  <div class="card-deck mt-3" th:each="publicacion:${foro.publicaciones}">
 
     <div class="card text-center border-info" >
       <div class="card-body" >
-        <h4 class="card-title" th:text="${foro.titulo}">Título del Foro</h4>
-        <h2 class="card-title" th:text="${foro.tema}">Tema del Foro</h2>
-        <p class="card-text" th:text="${foro.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lectus sem, 
-                              tempor vitae mattis malesuada, ornare sed erat. Pellentesque nulla dui, congue
-                              nec tortor sit amet, maximus mattis dui. </p>
-        <a href="'/foro?idForo='+${foro.id}" class="btn btn-warning">Entrar</a>
+        <h4 class="card-title" th:text="${publicacion.titulo}">Título del Foro</h4>
+        <h2 class="card-title" th:text="${publicacion.usuario}">Tema del Foro</h2>
+        <a href="#" class="btn btn-warning">Entrar</a>
       </div>
     </div>          
 
@@ -60,6 +68,6 @@
   </div>  
 	  
 	  
-	  
+</section>
   </body>
 </html>

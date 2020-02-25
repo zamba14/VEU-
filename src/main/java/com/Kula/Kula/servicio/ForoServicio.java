@@ -77,7 +77,7 @@ public class ForoServicio {
         if (descripcion == null || descripcion.isEmpty()) {
             error=error+"La descripcion no puede estar vacio.\n";
         }
-        if (publicaciones == null || publicaciones.isEmpty()) {
+        if (publicaciones == null) {
             error=error+"La publicacion no puede estar vacio.";
         }
         if(!error.equals("")){
