@@ -13,6 +13,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 public class ForoServicio {
 
@@ -22,7 +24,9 @@ public class ForoServicio {
     @Transactional
     public void guardarForo(String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores, String color) throws ErrorServicio {
         Foro foro = new Foro();
+
         validar(titulo, tema, descripcion, publicaciones);
+        //buscarModerador(moderadores);
 
         foro.setTitulo(titulo);
         foro.setDescripcion(descripcion);
@@ -96,4 +100,24 @@ public class ForoServicio {
         publicar.add(publicado);
         return publicar;
     }
+        // tituloExiste recibe el nuevo título y devuelve verdadero si existe el título 
+
+    public boolean tituloExiste(String titulo) {
+        boolean existe = false;
+        Foro respuesta = foroRepositorio.buscarPorTitulo(titulo);
+        return existe = respuesta != null;
+
+    }
+    //nuevaCategoria el usuario ingresa una nueva categoría consultar qué hacemos con las nuevas ccategorías
+    //
+
+    // listaModeradoresValida recibe lista de moderadores y devuelve si es valida o no de acuerdo si se encuentran  las alias. 
+    // 
+    public boolean esModerador(String idUsuario, String idForo) {
+        boolean existe = false;
+
+        return existe;
+    }
+
 }
+
