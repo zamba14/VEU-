@@ -30,8 +30,7 @@ public class PublicacionServicio {
         publicado.setTexto(texto);
         publicado.setUsuario(usuario);
         publicado.setFecha(new Date());
-        ArrayList<Respuesta> respuestas=new ArrayList<>();
-        publicado.setRespuestas(respuestas);
+        publicado.setRespuestas(new ArrayList<>());
         publicado.setEstado(true);
         publicacionRepositorio.save(publicado);
     
@@ -64,8 +63,8 @@ public class PublicacionServicio {
     }
     
     @Transactional
-    public void eliminarPublicacion(String id) throws ErrorServicio {
-        Optional<Publicacion> localizar = publicacionRepositorio.findById(id);
+    public void eliminarPublicacion(String idPublicacion, List<Usuario> moderadores, Usuario usuario) throws ErrorServicio {
+        Optional<Publicacion> localizar = publicacionRepositorio.findById(idPublicacion);
         if (localizar.isPresent()) {
             Publicacion publicacion = localizar.get();
             publicacion.setEstado(false);
