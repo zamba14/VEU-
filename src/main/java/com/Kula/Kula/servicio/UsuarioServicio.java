@@ -1,18 +1,34 @@
 package com.Kula.Kula.servicio;
 
+import com.Kula.Kula.entidad.Foro;
 import com.Kula.Kula.entidad.Foto;
 import com.Kula.Kula.entidad.Usuario;
 import com.Kula.Kula.error.ErrorServicio;
 import com.Kula.Kula.repositorio.UsuarioRepositorio;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class UsuarioServicio {
+@SessionAttributes("usuariosession")
+
+public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -21,7 +37,7 @@ public class UsuarioServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void guardarUsuario(MultipartFile archivo, String alias, String mail, String clave) throws ErrorServicio {
+    public Usuario guardarUsuario(MultipartFile archivo, String alias, String mail, String clave) throws ErrorServicio {
 
         validar(alias, mail, clave);
 
@@ -29,14 +45,35 @@ public class UsuarioServicio {
 
         usuario.setAlias(alias);
         usuario.setMail(mail);
-        usuario.setContraseña(clave);
-        Foto foto = fotoServicio.guardar(archivo);
-        usuario.setFoto(foto);
+        String encriptada = new BCryptPasswordEncoder().encode(clave);
+
+        usuario.setContraseña(encriptada);
+//        Foto foto = fotoServicio.guardar(archivo);
+//        usuario.setFoto(foto);
         usuario.setEstado(true);
+        usuario.setPreferencia(new ArrayList());
 
         usuarioRepositorio.save(usuario);
+        return usuario;
+    }
+
+    @Transactional
+    public void addPreferencia(Foro foro, String id) throws ErrorServicio {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            List<Foro> preferencia = usuario.getPreferencia();
+            preferencia.add(foro);
+
+            usuarioRepositorio.save(usuario);
+            
+        } else {
+            throw new ErrorServicio("No existe usuario con ese id.");
+        }
 
     }
+    
+    
 
     @Transactional
     public void modificarUsuario(MultipartFile archivo, String id, String alias, String mail, String clave) throws ErrorServicio {
@@ -86,23 +123,51 @@ public class UsuarioServicio {
         }
     }
 
-    //LOGICA DEL LOGIN RECIBE ALIAS/MAIL y CONTRASEÑA, recupera en el repo y devuelve errores si alguno de los valores no coincide;
-    public void login(ModelMap modelo, String password, String alias) throws ErrorServicio{
-
+//    //LOGICA DEL LOGIN RECIBE ALIAS/MAIL y CONTRASEÑA, recupera en el repo y devuelve errores si alguno de los valores no coincide;
+//    public void loadByUserName(String password, String alias)  throws ErrorServicio {
+//
+//        Usuario usuario = usuarioRepositorio.buscarPorMailoAlias(alias);
+//        if (usuario != null) {
+//            if (password.equals(usuario.getContraseña())) {
+//                System.out.println("LOGIN EXITOSO");
+//                ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//                HttpSession session = attr.getRequest().getSession(true);
+//                session.setAttribute("usuario", usuario);
+//                
+//
+//            } else {
+//                throw new ErrorServicio("Contraseña incorrecta");
+//            }
+//
+//        } else {
+//            throw new ErrorServicio("No existe Usuario con ese Mail o Alias");
+//        }
+//        {
+//
+//        }
+//    }
+    @Override
+    public UserDetails loadUserByUsername(String alias) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorMailoAlias(alias);
-        if (usuario != null){
-            if (password.equals(usuario.getContraseña())){
-                System.out.println("LOGIN EXITOSO");
-                modelo.put("Usuario", usuario);
-            } else {
-                throw new ErrorServicio("Contraseña incorrecta");
-            }
-            
+        if (usuario != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList<>();
+
+            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_REGISTRADO");
+            permisos.add(p1);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuariosession", usuario);
+//            session.setAttribute("usuario", usuario);
+//           session.setAttribute("preferencia", usuario.getPreferencia());
+
+            User user = new User(usuario.getAlias(), usuario.getContraseña(), permisos);
+
+            return user;
+
         } else {
-            throw new ErrorServicio("No existe Usuario con ese Mail o Alias");
-        }
-     {
-            
+            return null;
         }
     }
 }

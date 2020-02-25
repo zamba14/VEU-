@@ -6,7 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,7 +20,8 @@ public class Foro {
     private String id;
     
     private String titulo;
-    private List<Categoria> tema;
+    
+    private Categoria tema;
     private String descripcion;
 
     public String getColor() {
@@ -31,7 +33,7 @@ public class Foro {
     }
     private String color;
     
-    @ManyToOne
+    @OneToMany
     private List<Publicacion> publicaciones;
     
     @ManyToMany
@@ -63,13 +65,14 @@ public class Foro {
         this.titulo = titulo;
     }
 
-    public List<Categoria> getTema() {
+    public Categoria getTema() {
         return tema;
     }
 
-    public void setTema(List<Categoria> tema) {
+    public void setTema(Categoria tema) {
         this.tema = tema;
     }
+
 
     public String getDescripcion() {
         return descripcion;

@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* CSS Document */
+
+.header{
+	background-color: aqua;
+	width: 100%;
+}
+
+
+.navbar-default.scrolled{
+  background:#000;
+}
+
+
+.footer{
+background-color: #FFC107
+}
+
+.footer p{
+	text-align: center;
+	color: #000;
+	font-size: 15px;
+	margin-top: 50px;
+	padding: 20px;
+}

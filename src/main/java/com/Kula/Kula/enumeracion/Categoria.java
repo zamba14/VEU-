@@ -1,5 +1,7 @@
 package com.Kula.Kula.enumeracion;
 
+import javax.persistence.Entity;
+
 
 public enum Categoria{
     Violencia_de_genero,
