@@ -6,6 +6,7 @@ import com.Kula.Kula.entidad.Usuario;
 import com.Kula.Kula.enumeracion.Categoria;
 import com.Kula.Kula.error.ErrorServicio;
 import com.Kula.Kula.repositorio.ForoRepositorio;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -19,17 +20,18 @@ public class ForoServicio {
     ForoRepositorio foroRepositorio;
 
     @Transactional
-    public void guardarForo(String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores) throws ErrorServicio {
+    public void guardarForo(String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores, String color) throws ErrorServicio {
         Foro foro = new Foro();
         validar(titulo, tema, descripcion, publicaciones);
 
         foro.setTitulo(titulo);
         foro.setDescripcion(descripcion);
         foro.setTema(tema);
-        foro.setPublicaciones(publicaciones);
+        foro.setPublicaciones(new ArrayList());
         foro.setModerador(moderadores);
+        foro.setColor(color);
         foro.setEstado(true);
-        
+
         foroRepositorio.save(foro);
     }
 
@@ -52,7 +54,7 @@ public class ForoServicio {
             throw new ErrorServicio("No existe un usario con este id.");
         }
     }
-    
+
     @Transactional
     public void eliminarForo(String id) throws ErrorServicio {
         Optional<Foro> localizar = foroRepositorio.findById(id);
@@ -67,23 +69,31 @@ public class ForoServicio {
     }
 
     private void validar(String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones) throws ErrorServicio {
-        String error="";
+        String error = "";
         if (titulo == null || titulo.isEmpty()) {
-            error=error+"El titulo no puede estar vacio.\n";
+            error = error + "El titulo no puede estar vacio.\n";
         }
-        if (tema == null ) {
-            error=error+"El tema no puede ser nulo.\n";
+        if (tema == null) {
+            error = error + "El tema no puede ser nulo.\n";
         }
         if (descripcion == null || descripcion.isEmpty()) {
-            error=error+"La descripcion no puede estar vacio.\n";
+            error = error + "La descripcion no puede estar vacio.\n";
         }
         if (publicaciones == null || publicaciones.isEmpty()) {
-            error=error+"La publicacion no puede estar vacio.";
+            error = error + "La publicacion no puede estar vacio.";
         }
-        if(!error.equals("")){
+        if (!error.equals("")) {
             throw new ErrorServicio(error);
         }
+    }
+
+    public List<Publicacion> crearPublicacion(String idForo, String titulo, String texto, Usuario usuario) {
+        Foro foro = foroRepositorio.findById(idForo).get();
+        List<Publicacion> publicar = foro.getPublicaciones();
+        Publicacion publicado = new Publicacion();
+        publicado.set
         
-    
+        publicar.add(publicado);
+        return publicar;
     }
 }

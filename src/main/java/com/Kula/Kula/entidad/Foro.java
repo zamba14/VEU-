@@ -11,18 +11,27 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
 @Entity
 public class Foro {
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     private String titulo;
-    
+
     private Categoria tema;
     private String descripcion;
+    private String color;
+
+    @OneToMany
+    private List<Publicacion> publicaciones;
+
+    @ManyToMany
+    private List<Usuario> moderador;
+
+    private boolean estado;
 
     public String getColor() {
         return color;
@@ -31,15 +40,6 @@ public class Foro {
     public void setColor(String color) {
         this.color = color;
     }
-    private String color;
-    
-    @OneToMany
-    private List<Publicacion> publicaciones;
-    
-    @ManyToMany
-    private List<Usuario> moderador;
-    
-    private boolean estado;
 
     public boolean isEstado() {
         return estado;
@@ -73,7 +73,6 @@ public class Foro {
         this.tema = tema;
     }
 
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -98,5 +97,4 @@ public class Foro {
         this.moderador = moderador;
     }
 
-    
 }
