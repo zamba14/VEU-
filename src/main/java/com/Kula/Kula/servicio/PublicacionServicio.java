@@ -5,6 +5,8 @@ import com.Kula.Kula.entidad.Respuesta;
 import com.Kula.Kula.entidad.Usuario;
 import com.Kula.Kula.error.ErrorServicio;
 import com.Kula.Kula.repositorio.PublicacionRepositorio;
+import com.Kula.Kula.repositorio.UsuarioRepositorio;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +21,8 @@ public class PublicacionServicio {
     private PublicacionRepositorio publicacionRepositorio;
 
     @Transactional
-    public void guardarPublicacion(String titulo, String texto, Usuario usuario) throws ErrorServicio {
+    //guardarPublicacion recibe titulo,texto y usuario y guarda una nueva publicacion
+    public Publicacion guardarPublicacion(String titulo, String texto, Usuario usuario) throws ErrorServicio {
         Publicacion publicado = new Publicacion();
         validar(titulo, texto, usuario);
 
@@ -27,24 +30,33 @@ public class PublicacionServicio {
         publicado.setTexto(texto);
         publicado.setUsuario(usuario);
         publicado.setFecha(new Date());
-        publicado.setRespuestas(null);
+        ArrayList<Respuesta> respuestas=new ArrayList<>();
+        publicado.setRespuestas(respuestas);
         publicado.setEstado(true);
-
         publicacionRepositorio.save(publicado);
+    
+    return publicado;
     }
 
     @Transactional
-    public void modificarPublicacion(String id, String titulo, String texto, List<Respuesta> respuesta) throws ErrorServicio {
-
-        Optional<Publicacion> localizar = publicacionRepositorio.findById(id);
+    //modificarPublicacion recibe id de publicacion y el nuevo título y texto y lo modifica
+    //controla que el usuario sea moderador 
+    public void modificarPublicacion(String idPublicacion, String titulo, String texto, Usuario usuario) throws ErrorServicio {
+       //controla que el usuario sea moderador
+        //Optional<Usuario> usuario=new usuarioRepositorio.findById()
+//si es sí valida los datos
+       // materializa la publicacion y cambia los nuevos parámetros.
+        
+        
+        Optional<Publicacion> localizar = publicacionRepositorio.findById(idPublicacion);
         if (localizar.isPresent()) {
             Publicacion publicado = localizar.get();
-
+            validar(titulo, texto, usuario);
             publicado.setTitulo(titulo);
             publicado.setTexto(texto);
             publicado.setFecha(new Date());
             publicado.setRespuestas(respuesta);
-
+//metodo para agregr una sola respuesta
             publicacionRepositorio.save(publicado);
         }else{
             throw new ErrorServicio("No existen usuario con este id.");
