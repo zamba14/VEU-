@@ -23,39 +23,31 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
 
-	 
+	
     
 	  
 	 <header th:insert="index :: header">...</header>
-   
-   <div class="container">
-  
-   
-    <div class="container">   
-  <div class="card-deck mt-3">
+    <br/>
+    <br/>
+    <br/>
 
-           
 
-    <div class="card text-center border-info">
-      <div class="card-body">
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          
-          <form action="/login" method="POST">
-              <label for="alias">Nombre de Usuario o Mail</label>
-              <input type="text" id="alias" name="alias">
-              <label for="password">Contraseña</label>
-              <input type="password" id="password" name="password">
-              <button type="submit">Enviar!</button>
-            </form>
-              
+   
+    <div class="container" th:fragment="listaforos">   
+  <div class="card-deck mt-3" th:each="foro:${preferencia}">
+
+    <div class="card text-center border-info" >
+      <div class="card-body" >
+        <h4 class="card-title" th:text="${foro.titulo}">Título del Foro</h4>
+        <h2 class="card-title" th:text="${foro.tema}">Tema del Foro</h2>
+        <p class="card-text" th:text="${foro.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lectus sem, 
+                              tempor vitae mattis malesuada, ornare sed erat. Pellentesque nulla dui, congue
+                              nec tortor sit amet, maximus mattis dui. </p>
+        <a th:href="'/foro?idForo='+${foro.id}" class="btn btn-warning">Entrar</a>
       </div>
     </div>          
 
-           
+    
 
   </div>
 </div>  
@@ -68,6 +60,6 @@
   </div>  
 	  
 	  
-
+	  
   </body>
 </html>
