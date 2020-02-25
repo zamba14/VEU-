@@ -19,7 +19,7 @@ public class ForoServicio {
     ForoRepositorio foroRepositorio;
 
     @Transactional
-    public void guardarForo(String titulo, List<Categoria> tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores) throws ErrorServicio {
+    public void guardarForo(String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores) throws ErrorServicio {
         Foro foro = new Foro();
         validar(titulo, tema, descripcion, publicaciones);
 
@@ -34,7 +34,7 @@ public class ForoServicio {
     }
 
     @Transactional
-    public void modificarForo(String id, String titulo, List<Categoria> tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores) throws ErrorServicio {
+    public void modificarForo(String id, String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones, List<Usuario> moderadores) throws ErrorServicio {
         validar(titulo, tema, descripcion, publicaciones);
 
         Optional<Foro> localizar = foroRepositorio.findById(id);
@@ -66,12 +66,12 @@ public class ForoServicio {
         }
     }
 
-    private void validar(String titulo, List<Categoria> tema, String descripcion, List<Publicacion> publicaciones) throws ErrorServicio {
+    private void validar(String titulo, Categoria tema, String descripcion, List<Publicacion> publicaciones) throws ErrorServicio {
         String error="";
         if (titulo == null || titulo.isEmpty()) {
             error=error+"El titulo no puede estar vacio.\n";
         }
-        if (tema == null || tema.isEmpty()) {
+        if (tema == null ) {
             error=error+"El tema no puede ser nulo.\n";
         }
         if (descripcion == null || descripcion.isEmpty()) {
