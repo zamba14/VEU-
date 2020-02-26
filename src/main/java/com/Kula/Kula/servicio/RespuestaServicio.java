@@ -17,7 +17,7 @@ public class RespuestaServicio {
     private RespuestaRepositorio respuestaRepositorio;
 
     @Transactional
-    public void guardarRespuesta(String texto, Usuario usuario) throws ErrorServicio {
+    public Respuesta guardarRespuesta(String texto, Usuario usuario) throws ErrorServicio {
 
         validarTodo(texto, usuario);
 
@@ -29,6 +29,7 @@ public class RespuestaServicio {
         respuesta.setEstado(true);
         
         respuestaRepositorio.save(respuesta);
+        return respuesta;
     }
     
     @Transactional
@@ -68,12 +69,17 @@ public class RespuestaServicio {
         }
     }
     private void validarTodo(String texto, Usuario usuario) throws ErrorServicio {
+        String error="";
         if (texto == null || texto.isEmpty()) {
-            throw new ErrorServicio("La respuesta no puede estar vacia.");
+            error = error + "La respuesta no puede estar vacia.\n";
         }
 
         if (usuario == null) {
-            throw new ErrorServicio("Debe haber un usuario.");
+            error = error + "Debe haber un usuario.";
+        }
+        
+        if(!error.equals("")){
+            throw new ErrorServicio(error);
         }
     }
 }
