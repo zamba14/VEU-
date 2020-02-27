@@ -3,15 +3,14 @@ package com.Kula.Kula.controlador;
 //import com.Kula.Kula.entidad.Usuario;
 //import com.Kula.Kula.enumeracion.Categoria;
 //import com.Kula.Kula.entidad.Foro;
-import com.Kula.Kula.entidad.Publicacion;
 import com.Kula.Kula.entidad.Usuario;
-import com.Kula.Kula.enumeracion.Categoria;
 import com.Kula.Kula.error.ErrorServicio;
 import com.Kula.Kula.repositorio.ForoRepositorio;
+import com.Kula.Kula.repositorio.PublicacionRepositorio;
 import com.Kula.Kula.repositorio.UsuarioRepositorio;
 import com.Kula.Kula.servicio.ForoServicio;
+import com.Kula.Kula.servicio.PublicacionServicio;
 import com.Kula.Kula.servicio.UsuarioServicio;
-import java.util.ArrayList;
 //import java.util.ArrayList;
 //import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -24,9 +23,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@SessionAttributes({"preferencia", "usuario"})
+@SessionAttributes({"preferencia", "usuario","foro"})
 
 @RequestMapping("/")
 public class PortalControlador {
@@ -39,6 +39,10 @@ public class PortalControlador {
     UsuarioServicio usuarioServicio;
     @Autowired
     ForoServicio foroServicio;
+    @Autowired
+    PublicacionServicio publicacionServicio;
+    @Autowired
+    PublicacionRepositorio publicacionRepositorio;
 
     @GetMapping("/")
     public String inicio(HttpSession sesion, ModelMap modelo) {
@@ -90,7 +94,35 @@ public class PortalControlador {
 
         return "/index";
     }
-
+    
+    @PostMapping("/crearPost")
+    public String crearPost(HttpSession sesion, @RequestParam String titulo, @RequestParam String texto, @RequestParam String idForo,ModelMap modelo){
+        Usuario usuario = (Usuario) sesion.getAttribute("usuariosession");
+        try{
+            foroServicio.crearPublicacion(idForo, titulo, texto, usuario);
+        } catch (ErrorServicio ex){
+            System.out.println(ex.getMessage());
+        }
+        return foro(idForo,modelo);
+    }
+    
+    
+    @GetMapping("/publicacion")
+    public String publicacion(@RequestParam String idPublicacion, ModelMap modelo){
+        
+        
+        modelo.put("publicacion1",publicacionRepositorio.findById(idPublicacion).get());
+        return "publicacion.html";
+    }
+    
+    @PostMapping("/registro")
+    public String registro(MultipartFile foto, @RequestParam String alias, @RequestParam String mail, @RequestParam String clave){
+    try{usuarioServicio.guardarUsuario(foto, alias, mail, clave);}catch (ErrorServicio ex){
+        System.out.println(ex.getMessage());}
+    return "/login";
+    }
+    
+    }
 //    @GetMapping("/prueba")
 //    public String prueba(ModelMap modelo) {
 //        Usuario user1;
@@ -117,4 +149,4 @@ public class PortalControlador {
 //
 //        return "/index";
 //    }
-}
+

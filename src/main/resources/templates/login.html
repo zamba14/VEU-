@@ -35,28 +35,7 @@
   
    
     <div class="container">   
-  <div class="card-deck mt-3">
-
-           
-
-    <div class="card text-center border-info">
-      <div class="card-body">
-         
-          
-          <form action="/login" method="POST">
-              <label for="alias">Nombre de Usuario o Mail</label>
-              <input type="text" id="alias" name="alias">
-              <label for="password">Contraseña</label>
-              <input type="password" id="password" name="password">
-              <button type="submit">Enviar!</button>
-            </form>
-              
-      </div>
-    </div>          
-
-           
-
-  </div>
+  <div th:insert="loginVEU :: login"></div>
 </div>  
 	
 	  
