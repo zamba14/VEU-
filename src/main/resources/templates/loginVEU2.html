@@ -13,17 +13,17 @@
 
 <body>
   <header></header>
-  <div class="row justify-content-center h-100" th:fragment="login">
-  <div class="container-fluid justify-content-center">
-    <div class="row no-gutter justify-content-center">
+  <div class="float-center" th:fragment="login">
+  <div class="container-fluid">
+    <div class="row no-gutter">
       <!-- <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div> -->
-      <div class="col-md-8 col-lg-6 justify-content-center">
-        <div class="login d-flex justify-content-center py-5" >
-          <div class="container align-items-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="login d-flex align-items-center py-5" >
+          <div class="container">
             
-              <div class="col-md-9 col-lg-8 mx-auto justify-content-center align-items-center">
-                <img src="img/isotipo.png" alt="" width="150" height="150" class="image-1  mx-auto d-block">
-                <h3 class="login-heading mb-4 text-center">Bienvenide </h3>
+              <div class="col-md-9 col-lg-8 mx-auto align-center">
+                <img src="img/isotipo.png" alt="" width="150" height="150" class="image-1">
+                <h3 class="login-heading mb-4">Bienvenid@ </h3>
                 <form action="/login" method="POST">
                   <div class="form-label-group">
                     <input type="text" name="alias" class="form-control" placeholder="Nombre de Usuario o Correo Electrónico" required
@@ -74,34 +74,38 @@
                             
                             <div class="input-group mb-3">
                               <div class="input-group mb-3">
-                                                           
+                                <div class="input-group-prepend">
+                                  <button type="button" class="btn btn-outline-warning">Nombre de Usuario</button>
+                                </div>
+                                
                               
                                 <input type="text" class="form-control" placeholder="Nombre de Usuario" aria-label="Username" aria-describedby="basic-addon1" name="alias">
                               </div>
                               
                             <div class="input-group mb-3">
-                            
+                              <div class="input-group-prepend">
+                                <button type="button" class="btn btn-outline-warning">Foto</button>
+                              </div>
                               <div class="custom-file">
-                                <input type="file" class="form-control-file" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="foto"/>
-                                
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="foto">
+                                <label class="custom-file-label" for="inputGroupFile01">Elegir Foto</label>
                               </div>
                             </div>
                             
-                            
+                            <label for="inputEmail"><button type="button" class="btn btn-outline-warning">Correo Electrónico</button></label>
                               <input type="email" class="form-control" placeholder="Correo Electrónico"  name="mail" required
                                 autofocus />
                               
-                              
-                              <input type="password" class="form-control" placeholder="Contraseña" name="clave" id="clave" required />
-                            
-                              <input type="password" class="form-control" placeholder="Repetir Contraseña" name="claveBis" id="claveBis"  required />
-                             
-                            
+                              <label for="inputPassword"><button type="button" class="btn btn-outline-warning">Contraseña</button></label>
+                              <input type="password" class="form-control" placeholder="Contraseña" name="clave" required />
+                              <label for="inputPassword"><button type="button" class="btn btn-outline-warning">Repita Contraseña</button></label>
+                              <input type="password" class="form-control" placeholder="Password" name="claveBis" required />
+
 
                           
                         </div>
                         <div class="modal-footer">
-                          <button type="submit" class="btn btn-outline-warning" onClick="validar()">Registrarme</button>
+                          <button type="submit" class="btn btn-outline-warning">Registrarme</button>
                           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
                           
                         </div>
@@ -129,28 +133,5 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-
- 
   </body>
-
-  <script type="text/javascript">
-    function validar(){
-  var clave = document.getElementById("clave").value;
-  var claveBis = document.getElementById("claveBis").value;
-  
-  if (clave != claveBis) {
-    
-    
-    alert("Las Contraseñas deben coincidir");
-    return false;
-    
-  } else {
-    
-    return true;
-   
-  }
-}
-</script>
-
-
   </html>

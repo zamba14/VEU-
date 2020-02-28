@@ -39,6 +39,9 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional
     public Usuario guardarUsuario(MultipartFile archivo, String alias, String mail, String clave) throws ErrorServicio {
 
+     
+        if(verificar(alias, mail)){
+        
         validar(alias, mail, clave);
 
         Usuario usuario = new Usuario();
@@ -48,13 +51,16 @@ public class UsuarioServicio implements UserDetailsService {
         String encriptada = new BCryptPasswordEncoder().encode(clave);
 
         usuario.setContraseña(encriptada);
-//        Foto foto = fotoServicio.guardar(archivo);
-//        usuario.setFoto(foto);
+        if (archivo!=null){
+        Foto foto = fotoServicio.guardar(archivo);
+        usuario.setFoto(foto);
+        }
         usuario.setEstado(true);
         usuario.setPreferencia(new ArrayList());
 
         usuarioRepositorio.save(usuario);
-        return usuario;
+        return usuario;}
+        else{ throw new ErrorServicio("Ya existe un Usuario con ese Alias o Mail");}
     }
 
     @Transactional
@@ -121,6 +127,13 @@ public class UsuarioServicio implements UserDetailsService {
         if (clave == null || clave.isEmpty() || clave.length() < 6) {
             throw new ErrorServicio("La clave no puede ser nula y debe tener 6 caracter como minimo.");
         }
+    }
+    
+    private boolean verificar(String alias, String mail){
+           
+        Optional <Usuario> respuesta = usuarioRepositorio.verificar(alias, mail);
+        return !respuesta.isPresent();
+        
     }
 
 //    //LOGICA DEL LOGIN RECIBE ALIAS/MAIL y CONTRASEÑA, recupera en el repo y devuelve errores si alguno de los valores no coincide;
