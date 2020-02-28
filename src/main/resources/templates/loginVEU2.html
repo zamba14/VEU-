@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
+  <title>V E U</title>
+</head>
+
+<body>
+  <header></header>
+  <div class="float-center" th:fragment="login">
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <!-- <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div> -->
+      <div class="col-md-8 col-lg-6">
+        <div class="login d-flex align-items-center py-5" >
+          <div class="container">
+            
+              <div class="col-md-9 col-lg-8 mx-auto align-center">
+                <img src="img/isotipo.png" alt="" width="150" height="150" class="image-1">
+                <h3 class="login-heading mb-4">Bienvenid@ </h3>
+                <form action="/login" method="POST">
+                  <div class="form-label-group">
+                    <input type="text" name="alias" class="form-control" placeholder="Nombre de Usuario o Correo Electrónico" required
+                      autofocus />
+                    
+                  </div>
+                  <br>
+                  <div class="form-label-group">
+                    <input type="password" name="password" class="form-control" placeholder="Contraseña" required />
+                    
+                  </div>
+
+                  <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                    <label class="custom-control-label" for="customCheck1">Recordar mi Contraseña</label>
+                  </div>
+                  <button type="submit" class="btn btn-lg btn-warning btn-block btn-login text-uppercase font-weight-bold mb-2"
+                    >
+                    Iniciar Sesión
+                  </button>
+                  <!-- REDES -->
+                  <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
+                  <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button> -->
+                  <!-- <div class="text-center">
+                    <h5>O</h5>
+                  </div> -->
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-lg btn-dark btn-block text-uppercase font-weight-bold" data-toggle="modal" data-target="#exampleModal">
+                    Registrarme
+                  </button>
+                </form>
+                  <!-- <img src="img/isotipo.png" class="img" width="200" height="200"> -->
+                  <!-- Modal -->
+                  <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true" th:fragment="registroUsuario">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Formulario de Registro</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        
+                        <div class="modal-body">
+                          
+                          <form action="/registro" method="POST" enctype="multipart/form-data">
+                            
+                            <div class="input-group mb-3">
+                              <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <button type="button" class="btn btn-outline-warning">Nombre de Usuario</button>
+                                </div>
+                                
+                              
+                                <input type="text" class="form-control" placeholder="Nombre de Usuario" aria-label="Username" aria-describedby="basic-addon1" name="alias">
+                              </div>
+                              
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <button type="button" class="btn btn-outline-warning">Foto</button>
+                              </div>
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="foto">
+                                <label class="custom-file-label" for="inputGroupFile01">Elegir Foto</label>
+                              </div>
+                            </div>
+                            
+                            <label for="inputEmail"><button type="button" class="btn btn-outline-warning">Correo Electrónico</button></label>
+                              <input type="email" class="form-control" placeholder="Correo Electrónico"  name="mail" required
+                                autofocus />
+                              
+                              <label for="inputPassword"><button type="button" class="btn btn-outline-warning">Contraseña</button></label>
+                              <input type="password" class="form-control" placeholder="Contraseña" name="clave" required />
+                              <label for="inputPassword"><button type="button" class="btn btn-outline-warning">Repita Contraseña</button></label>
+                              <input type="password" class="form-control" placeholder="Password" name="claveBis" required />
+
+
+                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-outline-warning">Registrarme</button>
+                          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal -->
+
+                </form>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <footer></footer>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  </body>
+  </html>
