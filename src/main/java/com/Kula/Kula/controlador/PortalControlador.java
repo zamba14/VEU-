@@ -74,11 +74,19 @@ public class PortalControlador {
         return "foros.html";
     }
     
+        @GetMapping("/explorar")
+    public String explorar(ModelMap modelo){
+        modelo.put("foros", foroRepositorio.findAll());
+        return "explorar.html";
+    }
+    
     @GetMapping("/foro")
     public String foro(@RequestParam String idForo, ModelMap modelo){
         modelo.put("foro",foroRepositorio.findById(idForo).get());
         return "foro.html";
     }
+    
+    
 
     @PostMapping("/login")
     public String login(ModelMap modelo, @RequestParam String alias, @RequestParam String password, HttpSession sesion) {

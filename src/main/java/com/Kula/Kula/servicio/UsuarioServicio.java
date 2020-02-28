@@ -135,6 +135,8 @@ public class UsuarioServicio implements UserDetailsService {
         return !respuesta.isPresent();
         
     }
+    
+     
 
 //    //LOGICA DEL LOGIN RECIBE ALIAS/MAIL y CONTRASEÑA, recupera en el repo y devuelve errores si alguno de los valores no coincide;
 //    public void loadByUserName(String password, String alias)  throws ErrorServicio {
