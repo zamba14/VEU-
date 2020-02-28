@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+
+  <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
+    <title>VEU!</title>
+  </head>
+  <body>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	
+
+	
+    
+	  
+	 <header th:insert="index :: header">...</header>
+    <br/>
+    <br/>
+    <br/>
+
+
+   
+    <div class="container" th:fragment="listaforos">   
+  <div class="card-deck mt-3" th:each="foro:${foros}">
+
+    <div class="card text-center border-info" >
+      <div class="card-body" >
+        <h4 class="card-title" th:text="${foro.titulo}">Título del Foro</h4>
+        <h2 class="card-title" th:text="${foro.tema}">Tema del Foro</h2>
+        <p class="card-text" th:text="${foro.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lectus sem, 
+                              tempor vitae mattis malesuada, ornare sed erat. Pellentesque nulla dui, congue
+                              nec tortor sit amet, maximus mattis dui. </p>
+        <a th:href="'/foro?idForo='+${foro.id}" class="btn btn-warning">Entrar</a>
+      </div>
+    </div>          
+
+    
+
+  </div>
+</div>  
+	
+	  
+	<div class="footer">
+    <footer>
+     <p> TODOS LOS DERECHOS RESERVADOS A VEU</p>
+    </footer>
+  </div>  
+	  
+	  
+	  
+  </body>
+</html>
