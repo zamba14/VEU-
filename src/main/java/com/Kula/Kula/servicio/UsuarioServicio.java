@@ -4,6 +4,7 @@ import com.Kula.Kula.entidad.Foro;
 import com.Kula.Kula.entidad.Foto;
 import com.Kula.Kula.entidad.Usuario;
 import com.Kula.Kula.error.ErrorServicio;
+import com.Kula.Kula.repositorio.ForoRepositorio;
 import com.Kula.Kula.repositorio.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private FotoServicio fotoServicio;
+    
+    @Autowired
+    private ForoRepositorio foroRepositorio;
 
     @Transactional
     public Usuario guardarUsuario(MultipartFile archivo, String alias, String mail, String clave) throws ErrorServicio {
@@ -135,32 +139,7 @@ public class UsuarioServicio implements UserDetailsService {
         return !respuesta.isPresent();
         
     }
-    
-     
-
-//    //LOGICA DEL LOGIN RECIBE ALIAS/MAIL y CONTRASEÑA, recupera en el repo y devuelve errores si alguno de los valores no coincide;
-//    public void loadByUserName(String password, String alias)  throws ErrorServicio {
-//
-//        Usuario usuario = usuarioRepositorio.buscarPorMailoAlias(alias);
-//        if (usuario != null) {
-//            if (password.equals(usuario.getContraseña())) {
-//                System.out.println("LOGIN EXITOSO");
-//                ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//                HttpSession session = attr.getRequest().getSession(true);
-//                session.setAttribute("usuario", usuario);
-//                
-//
-//            } else {
-//                throw new ErrorServicio("Contraseña incorrecta");
-//            }
-//
-//        } else {
-//            throw new ErrorServicio("No existe Usuario con ese Mail o Alias");
-//        }
-//        {
-//
-//        }
-//    }
+   
     @Override
     public UserDetails loadUserByUsername(String alias) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorMailoAlias(alias);
@@ -184,5 +163,22 @@ public class UsuarioServicio implements UserDetailsService {
         } else {
             return null;
         }
+    }
+    @Transactional
+    public Usuario agregarPreferencia(String idForo, String idUsuario){
+
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+        Optional<Foro> foroRta = foroRepositorio.findById(idForo);
+        if (respuesta.isPresent() && foroRta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            Foro foro = foroRta.get();
+            if (!usuario.getPreferencia().contains(foro)){
+            usuario.getPreferencia().add(foro);
+            usuarioRepositorio.save(usuario);
+            return usuario;
+            }
+        }
+        return null;
     }
 }

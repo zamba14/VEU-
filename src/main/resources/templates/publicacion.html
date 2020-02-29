@@ -5,15 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	  	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+	  <link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
+
+
 
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 
-    <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
 
-    <title>VEU!</title>
+    <title>VEU! - Foro</title>
   </head>
   <body>
     
@@ -23,71 +25,63 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
-
-	
-    
+	    <header th:insert="index :: header"></header>
+    <br/>
+    <br/>
+    <br/>
 	  
-	 <header th:insert="index :: header">...</header>
-    <br/>
-    <br/>
-    <br/>
-
-    <section th:style="|background-color: ${foro.color}|">
-        <div class="card-deck mt-4">
-            <div class="card text-center border-info" >
-        <h1 th:text="${foro.titulo}">Titulo</h1>
-        <h2 th:text="${foro.tema}">Tema</h2>
-        <h4 th:text="${foro.descripcion}">Descripción</h4>
-    </div>
+	 
+	  
+	  
+	  
+	  
+	  
+	  
+	 <div class="crear">
+	  <a href="crear.html"><h1>CREÁ TU FORO</h1></a>
+	  </div>
+		 
+	  
+	 <div id="contenedorforo" th:style="|background-color: ${foro.color}|">
+		 
+	<div class="publicacion">
+		<div class="marco" th:style="|border-color: ${foro.color}|">
+		 <h2  th:text="${publicacion1.titulo.toUpperCase()}">RECICLAJE DE COLILLAS</h2>
+		 <h4 th:text="${publicacion1.texto}">Hola, quería saber como puedo hacer para reciclar mis colillas, ya que no quiero tiralas en la calle.</h4>
+ 	<p>Creador:</p><p th:text="${publicacion1.usuario.alias}">Fabricio</p> <p>Publicado:</p> <p th:text="${publicacion1.fecha}">26-02-2020</p>
+	  </div>
+		 </div>
+		 
+		 
+	<div class="resp">
+		 <h3> RESPUESTAS: </h3>
+		 </div>
+		 
+	<div class="respuesta"  th:each="respuesta: ${publicacion1.respuestas}">
+		<h4 th:text="${respuesta.texto}"> Creo que lo que deberías hacer es guardalas en botellas y crear ladrillos.</h4>
+		<p>Emisor:</p> <p th:text="${respuesta.usuario.alias}">Lucas</p><p>Publicada:</p> <p th:text="${respuesta.fecha}">28-02-2020</p>
+		 </div>
+		 
+		 <div class="enviarrespuesta">
+     <form action="/crearRta" method="POST">
+      <textarea id="text" name="texto" placeholder="Escribir una respuesta"></textarea>
+      <input type="hidden" name="idUsuario" th:value="${usuario.id}">
+      <input type="hidden" name="idPublicacion" th:value="${publicacion1.id}">
+      <div class="enviar">
+        <input type="submit" value="ENVIAR">
         </div>
-        <br/>
-
-        <div th:insert="forms :: nuevoPost">...</div>
-
-
-   
-    
-  <div class="card-deck mt-2">
-
-    <div class="card text-center border-info" >
-      <div class="card-body" >
-        <h4 class="card-title" th:text="${publicacion1.titulo}">Título del Foro</h4>
-        <h5 class="card-title" th:text="${publicacion1.usuario.alias}">Usuario</h5>
       
-        <p th:text="${publicacion1.texto}"></p>
-      </div>
-    </div>          
-
-    
-
-  </div>
-</div>  
-<div class="card-deck mt-4" th:each="respuesta: ${publicacion1.respuestas}">
-
-    <div class="card text-center border-info" >
-      <div class="card-body" >
-        <p class="card-title" th:text="${respuesta.texto}">Respuesta</p>
-        <p class="card-title" th:text="${respuesta.date}">fecha</p>
-      
-        <a href="#" class="btn btn-warning">Responder</a>
-      </div>
-    </div>          
-
-    
-
-  </div>
-</div>  
-
-
-	
+    </form> 
+    </div>
+		 
+		  
+     </div>
 	  
-	<div class="footer">
+	  <div class="footer">
     <footer>
      <p> TODOS LOS DERECHOS RESERVADOS A VEU</p>
     </footer>
   </div>  
 	  
-	  
-</section>
-  </body>
+</body>
 </html>

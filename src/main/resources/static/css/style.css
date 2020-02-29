@@ -1,25 +1,178 @@
 @charset "utf-8";
 /* CSS Document */
 
-.header{
-	background-color: aqua;
-	width: 100%;
+body{
+	background-color: white;
 }
 
+
+/**FORO**/
+
+#contenedorforo{
+	width: 90%;
+	height: auto;
+	background-color: mediumseagreen;
+	margin-left: 5%;
+	border-radius: 5px;
+	padding: 3%;
+	
+}
+
+.publicacion h2{
+	font-size: 2vw;
+	font-family: lilita one;
+	
+	}
+.respuesta{
+	background-color: white;
+	width: 80%;
+	height: auto;
+	border-radius: 5px;
+	margin-left: 10%;
+	margin-bottom: 1%;
+	padding: 3%;
+}
+
+.publicacion{
+	background-color: white;
+	width: 90%;
+	height: auto;
+	border-radius: 5px;
+	margin-left: 5%;
+	margin-bottom: 2%;
+	padding: 1%;
+	
+}
+
+.publicacion p{
+	float: left;
+	margin-right: 2em;
+	font-size: 1.3vw;
+	
+}
+
+.respuesta p{
+	float: left;
+	margin-right: 2em;
+	font-size: 1.3vw;
+	
+}
+
+
+.resp{
+	background-color: white;
+	width: 15%;
+	height: auto;
+	border-radius: 5px;
+	margin-left: 10%;
+	margin-bottom: 1%;
+	
+}
+
+.resp h3{
+	font-size: 1.3vw;
+	font-family: lilita one;
+	text-align: center;
+	justify-content: center;
+	
+	
+	}
+
+
+.marco{
+
+	width: 100%;
+	height: auto;
+	border: mediumseagreen 0.5vw solid;
+	background-color: transparent;
+	border-radius: 5px;
+	padding: 5%;
+	
+	
+}
+
+
+.enviarrespuesta textarea{
+	background-color: white;
+	width: 80%;
+	height: auto;
+	border-radius: 5px;
+	margin-left: 10%;
+	margin-bottom: 30px;
+	padding: 1%;
+	
+}
+
+.enviar input{
+	background-color: white;
+	border-radius: 5px;
+	width: 10%;
+	height: 10%;
+	font-size: 1vw;
+	font-family: lilita one;
+	margin-left: 45%
+	
+}
+
+
+.respuesta h4{
+	font-size: 1.5vw;
+}
+
+
+.publicacion h4{
+	font-size: 1.5vw;
+}
+
+.crear{
+	background-color: #ffc107;
+	width: 100%;
+	height: 10%;
+	margin-bottom: 2%;
+}
+
+.crear h1{
+	text-align: center;
+	color: black;
+	font-family: lilita one;
+ 	font-size: 1.5vw;
+	padding: 15px;
+}
+
+
+
+
+/**INDEXXX**/
+
+.cabeza{
+	width: 100%;
+	height: 76px;
+	color: aliceblue;
+}
 
 .navbar-default.scrolled{
   background:#000;
 }
 
+.button{
+	color: antiquewhite;
+}
+
+
+
+
+/**FOOTER**/
 
 .footer{
-background-color: #FFC107
+background-color: #ffc107;
+width: 100%;
+height: auto;
 }
 
 .footer p{
 	text-align: center;
 	color: #000;
 	font-size: 15px;
-	margin-top: 50px;
 	padding: 20px;
+	margin-top: 20px;
 }

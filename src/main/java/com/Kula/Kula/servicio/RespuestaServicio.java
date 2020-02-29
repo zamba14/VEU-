@@ -26,6 +26,7 @@ public class RespuestaServicio {
         respuesta.setTexto(texto);
         respuesta.setUsuario(usuario);
         respuesta.setFecha(new Date());
+        System.out.println(respuesta.getFecha());
         respuesta.setEstado(true);
         
         respuestaRepositorio.save(respuesta);

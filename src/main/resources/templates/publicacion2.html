@@ -13,7 +13,7 @@
 
     <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
 
-    <title th:text="${foro.titulo}">VEU!</title>
+    <title>VEU!</title>
   </head>
   <body>
     
@@ -38,7 +38,6 @@
         <h1 th:text="${foro.titulo}">Titulo</h1>
         <h2 th:text="${foro.tema}">Tema</h2>
         <h4 th:text="${foro.descripcion}">Descripción</h4>
-        <a th:href="'/agregarPreferencia?idForo='+${foro.id}+'&idUsuario='+${usuario.id}">Seguir este Foro</a>
     </div>
         </div>
         <br/>
@@ -47,15 +46,15 @@
 
 
    
-    <div class="container" th:fragment="listapublicaciones">   
-  <div class="card-deck mt-3" th:each="publicacion:${foro.publicaciones}">
+    
+  <div class="card-deck mt-2">
 
     <div class="card text-center border-info" >
       <div class="card-body" >
-        <h4 class="card-title" th:text="${publicacion.titulo}">Título del Foro</h4>
-        <h5 class="card-title" th:text="${publicacion.usuario.alias}">Usuario</h5>
-       
-        <a th:href="'/publicacion?idPublicacion='+${publicacion.id}" class="btn btn-warning">Entrar</a>
+        <h4 class="card-title" th:text="${publicacion1.titulo}">Título del Foro</h4>
+        <h5 class="card-title" th:text="${publicacion1.usuario.alias}">Usuario</h5>
+      
+        <p th:text="${publicacion1.texto}"></p>
       </div>
     </div>          
 
@@ -63,6 +62,23 @@
 
   </div>
 </div>  
+<div class="card-deck mt-4" th:each="respuesta: ${publicacion1.respuestas}">
+
+    <div class="card text-center border-info" >
+      <div class="card-body" >
+        <p class="card-title" th:text="${respuesta.texto}">Respuesta</p>
+        <p class="card-title" th:text="${respuesta.date}">fecha</p>
+      
+        <a href="#" class="btn btn-warning">Responder</a>
+      </div>
+    </div>          
+
+    
+
+  </div>
+</div>  
+
+
 	
 	  
 	<div class="footer">

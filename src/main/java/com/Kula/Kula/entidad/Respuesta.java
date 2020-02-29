@@ -18,7 +18,7 @@ public class Respuesta {
     private String id;
     
     private String texto;
-    @Temporal (TemporalType.DATE)
+    @Temporal (TemporalType.TIMESTAMP)
     private Date fecha;
     
     @ManyToOne

@@ -5,8 +5,9 @@ import com.Kula.Kula.entidad.Respuesta;
 import com.Kula.Kula.entidad.Usuario;
 import com.Kula.Kula.error.ErrorServicio;
 import com.Kula.Kula.repositorio.PublicacionRepositorio;
-import com.Kula.Kula.repositorio.UsuarioRepositorio;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,8 @@ public class PublicacionServicio {
 
     @Autowired
     private PublicacionRepositorio publicacionRepositorio;
+    @Autowired
+    private RespuestaServicio respuestaServicio;
 
     @Transactional
     //guardarPublicacion recibe titulo,texto y usuario y guarda una nueva publicacion
@@ -85,5 +88,14 @@ public class PublicacionServicio {
         if (usuario == null) {
             throw new ErrorServicio("El usuario debe existir.");
         }
+    }
+    
+        public void crearRespuesta(String idPublicacion, String texto, Usuario usuario) throws ErrorServicio {
+        Publicacion publicacion = publicacionRepositorio.findById(idPublicacion).get();
+        Respuesta respuesta  = respuestaServicio.guardarRespuesta(texto, usuario);
+        publicacion.getRespuestas().add(respuesta);
+       
+        Collections.sort(publicacion.getRespuestas(), Comparator.comparing(Respuesta::getFecha));
+        publicacionRepositorio.save(publicacion);
     }
 }
