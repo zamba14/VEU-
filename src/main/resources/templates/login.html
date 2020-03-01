@@ -27,23 +27,25 @@
     
 	  
 	 <header th:insert="index :: header">...</header>
-   <br/>
-   <br/>
-   <br/>
+   <br>
+   <br>
+   <br>
 
-   <div class="container">
+   <section class="container">
   
    
     <div class="container">   
   <div th:insert="loginVEU :: login"></div>
-</div>  
-	
-<div class="container">
+
+    </section>
+<section>
+  <div>
 	<div th:insert="index :: footer">
  
   </div>  
-	  
-</div>
+	  </div>
+  </section>
+
 
   </body>
 </html>

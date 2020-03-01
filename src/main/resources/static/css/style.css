@@ -7,6 +7,29 @@ body{
 
 
 
+/***FOROS****/
+
+.card{
+	width: 70%;
+	margin-left: 15%;
+	margin-bottom: 2%;
+	text-align: center;
+}
+
+.card-header{
+	background-color: #ffc107 ;
+}
+
+.card-title{
+	
+}
+
+.card a{
+color:black;
+
+}
+
+
 /**ERRRORRRRR*//
 
 .error{

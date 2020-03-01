@@ -24,9 +24,9 @@
               <div class="col-md-9 col-lg-8 mx-auto justify-content-center align-items-center">
                 <img src="img/isotipo.png" alt="" width="150" height="150" class="image-1  mx-auto d-block">
                 <h3 class="login-heading mb-4 text-center">Bienvenide </h3>
-                <form action="/login" method="POST">
+                <form action="/logincheck" method="POST">
                   <div class="form-label-group">
-                    <input type="text" name="alias" class="form-control" placeholder="Nombre de Usuario o Correo Electrónico" required
+                    <input type="text" name="alias" class="form-control" th:placeholder="${username != null} ? ${username}: 'Nombre de Usuario o Correo Electrónico' " required
                       autofocus />
                     
                   </div>

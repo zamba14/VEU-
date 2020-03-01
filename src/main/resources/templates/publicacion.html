@@ -45,7 +45,7 @@
 	 <div id="contenedorforo" th:style="|background-color: ${foro.color}|">
 		 
 	<div class="publicacion" style= "overflow: auto">
-		<div class="marco" th:style="|border-color: ${foro.color}| overflow: auto">
+		<div class="marco" th:style="|border-color: ${foro.color}|" style="overflow: auto">
 		 <h2  th:text="${publicacion1.titulo.toUpperCase()}">RECICLAJE DE COLILLAS</h2>
 		 <h4 th:text="${publicacion1.texto}" style="overflow-wrap: break-word;">Hola, quería saber como puedo hacer para reciclar mis colillas, ya que no quiero tiralas en la calle.</h4>
  	<p>Creador:</p><p th:text="${publicacion1.usuario.alias}">Fabricio</p> <p>Publicado:</p> <p th:text="${publicacion1.fecha}">26-02-2020</p>

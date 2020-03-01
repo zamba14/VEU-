@@ -30,27 +30,29 @@
     <br/>
     <br/>
     <br/>
+    <br/>
+    <br/>
+
 
 
    
     <div class="container" th:fragment="listaforos">   
-  <div class="card-deck mt-3" th:each="foro:${preferencia}">
 
-    <div class="card text-center border-info" >
-      <div class="card-body" >
-        <h4 class="card-title" th:text="${foro.titulo}">Título del Foro</h4>
-        <h2 class="card-title" th:text="${foro.tema}">Tema del Foro</h2>
-        <p class="card-text" th:text="${foro.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lectus sem, 
-                              tempor vitae mattis malesuada, ornare sed erat. Pellentesque nulla dui, congue
-                              nec tortor sit amet, maximus mattis dui. </p>
-        <a th:href="'/foro?idForo='+${foro.id}" class="btn btn-warning">Entrar</a>
+    <div class="card" th:each="foro:${preferencia}">
+      <div class="card-header" th:text="${foro.tema.nombre}">
+          Violencia de género
       </div>
-    </div>          
+      <div class="card-body">
+        <a th:href="'/foro?idForo='+${foro.id}"><h5 class="card-title" th:text="${foro.titulo}">xNecesito ayuda para escapar</h5></a>
+        <p class="card-text" th:text="${foro.descripcion}">Sufro violencia y necesito irme de mi casa, ¿consejos?</p>
+        <a th:href="'/agregarPreferencia?idForo='+${foro.id}+'&idUsuario='+${usuario.id}"> SEGUIR ESTE FORO</a>
+      </div>
+    </div>
 
     
 
   </div>
-</div>  
+
 	
 	  
 	<div class="footer">

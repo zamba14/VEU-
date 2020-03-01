@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,35 +37,37 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private FotoServicio fotoServicio;
-    
+
     @Autowired
     private ForoRepositorio foroRepositorio;
 
     @Transactional
     public Usuario guardarUsuario(MultipartFile archivo, String alias, String mail, String clave) throws ErrorServicio {
 
-     
-        if(verificar(alias, mail)){
-        
-        validar(alias, mail, clave);
+        if (verificar(alias, mail)) {
 
-        Usuario usuario = new Usuario();
+            validar(alias, mail, clave);
 
-        usuario.setAlias(alias);
-        usuario.setMail(mail);
-        String encriptada = new BCryptPasswordEncoder().encode(clave);
+            Usuario usuario = new Usuario();
 
-        usuario.setContraseña(encriptada);
-        if (archivo!=null){
-        Foto foto = fotoServicio.guardar(archivo);
-        usuario.setFoto(foto);
+            usuario.setAlias(alias);
+            usuario.setMail(mail);
+            String encriptada = new BCryptPasswordEncoder().encode(clave);
+
+            usuario.setContraseña(encriptada);
+            if (archivo != null) {
+                Foto foto = fotoServicio.guardar(archivo);
+                usuario.setFoto(foto);
+            }
+            usuario.setEstado(true);
+            usuario.setPreferencia(new ArrayList());
+
+            usuarioRepositorio.save(usuario);
+
+            return usuario;
+        } else {
+            throw new ErrorServicio("Ya existe un Usuario con ese Alias o Mail");
         }
-        usuario.setEstado(true);
-        usuario.setPreferencia(new ArrayList());
-
-        usuarioRepositorio.save(usuario);
-        return usuario;}
-        else{ throw new ErrorServicio("Ya existe un Usuario con ese Alias o Mail");}
     }
 
     @Transactional
@@ -76,14 +79,12 @@ public class UsuarioServicio implements UserDetailsService {
             preferencia.add(foro);
 
             usuarioRepositorio.save(usuario);
-            
+
         } else {
             throw new ErrorServicio("No existe usuario con ese id.");
         }
 
     }
-    
-    
 
     @Transactional
     public void modificarUsuario(MultipartFile archivo, String id, String alias, String mail, String clave) throws ErrorServicio {
@@ -124,6 +125,10 @@ public class UsuarioServicio implements UserDetailsService {
             throw new ErrorServicio("El Alias del usuario no puede ser nulo.");
         }
 
+        if (alias.contains(" ")) {
+            throw new ErrorServicio("El Alias no puede contener espacios");
+        }
+
         if (mail == null || mail.isEmpty()) {
             throw new ErrorServicio("El Mail del usuario no puede ser nulo.");
         }
@@ -132,17 +137,20 @@ public class UsuarioServicio implements UserDetailsService {
             throw new ErrorServicio("La clave no puede ser nula y debe tener 6 caracter como minimo.");
         }
     }
-    
-    private boolean verificar(String alias, String mail){
-           
-        Optional <Usuario> respuesta = usuarioRepositorio.verificar(alias, mail);
+
+    private boolean verificar(String alias, String mail) {
+
+        Optional<Usuario> respuesta = usuarioRepositorio.verificar(alias, mail);
         return !respuesta.isPresent();
-        
+
     }
-   
+
     @Override
     public UserDetails loadUserByUsername(String alias) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorMailoAlias(alias);
+//        System.out.println(alias);
+//        System.out.println(usuario.getAlias());
+//        System.out.println(usuario.getContraseña());
         if (usuario != null) {
 
             List<GrantedAuthority> permisos = new ArrayList<>();
@@ -154,29 +162,30 @@ public class UsuarioServicio implements UserDetailsService {
             HttpSession session = attr.getRequest().getSession(true);
             session.setAttribute("usuariosession", usuario);
 //            session.setAttribute("usuario", usuario);
-//           session.setAttribute("preferencia", usuario.getPreferencia());
+//            Hibernate.initialize(usuario.getPreferencia());
+//            session.setAttribute("preferencia", usuario.getPreferencia());
 
             User user = new User(usuario.getAlias(), usuario.getContraseña(), permisos);
 
             return user;
 
         } else {
-            return null;
+            throw new UsernameNotFoundException("No se encontró un Usuario con ese Alias o Mail");
         }
     }
-    @Transactional
-    public Usuario agregarPreferencia(String idForo, String idUsuario)throws ErrorServicio{
 
+    @Transactional
+    public Usuario agregarPreferencia(String idForo, String idUsuario) throws ErrorServicio {
 
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
         Optional<Foro> foroRta = foroRepositorio.findById(idForo);
         if (respuesta.isPresent() && foroRta.isPresent()) {
             Usuario usuario = respuesta.get();
             Foro foro = foroRta.get();
-            if (!usuario.getPreferencia().contains(foro)){
-            usuario.getPreferencia().add(foro);
-            usuarioRepositorio.save(usuario);
-            return usuario;
+            if (!usuario.getPreferencia().contains(foro)) {
+                usuario.getPreferencia().add(foro);
+                usuarioRepositorio.save(usuario);
+                return usuario;
             }
         }
         throw new ErrorServicio("Ya estaba en tus preferencias!");

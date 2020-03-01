@@ -2,6 +2,7 @@ package com.Kula.Kula.entidad;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -22,7 +23,7 @@ public class Usuario {
     @ManyToOne //ver este valor
     private Foto foto;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Foro> preferencia;
     
     private boolean estado;
