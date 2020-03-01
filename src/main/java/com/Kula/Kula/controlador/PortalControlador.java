@@ -4,6 +4,7 @@ package com.Kula.Kula.controlador;
 //import com.Kula.Kula.enumeracion.Categoria;
 //import com.Kula.Kula.entidad.Foro;
 import com.Kula.Kula.entidad.Usuario;
+import com.Kula.Kula.enumeracion.Categoria;
 import com.Kula.Kula.error.ErrorServicio;
 import com.Kula.Kula.repositorio.ForoRepositorio;
 import com.Kula.Kula.repositorio.PublicacionRepositorio;
@@ -141,12 +142,36 @@ public class PortalControlador {
     @GetMapping("/agregarPreferencia")
     public String agregarPreferencia(@RequestParam String idForo, @RequestParam String idUsuario, ModelMap modelo,HttpSession sesion){
         Usuario usuario = (Usuario) sesion.getAttribute("usuariosession");
-        usuario = usuarioServicio.agregarPreferencia(idForo, usuario.getId());
+        try{
+            usuario = usuarioServicio.agregarPreferencia(idForo, usuario.getId());
+        }
+        catch (ErrorServicio ex){
+            System.out.println(ex.getMessage());
+        };
         
         modelo.put("preferencia", usuario.getPreferencia());
         return foro(idForo, modelo);
     }
+            @PostMapping("/crearForo")
+            public String crearForo(@RequestParam String titulo, @RequestParam String tema, @RequestParam String descripcion, @RequestParam String color){
+                String temaAux = tema.replaceAll("\\s","_");
+                Categoria temaiken = Categoria.valueOf(temaAux);
+                
+                
+                try{
+                    foroServicio.guardarForo(titulo, temaiken, descripcion, null, color);
+                }catch (ErrorServicio ex){
+                    System.out.println(ex.getMessage());
+                }
+                return "index.html";
+            }
             
+            @GetMapping("/crearforo")
+            public String crearforo(){
+                return "crearforo.html";
+            }
+            
+                    
             
     }
     

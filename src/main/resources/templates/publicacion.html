@@ -38,16 +38,16 @@
 	  
 	  
 	 <div class="crear">
-	  <a href="crear.html"><h1>CREÁ TU FORO</h1></a>
+	  <a href="/crearforo"><h1>CREÁ TU FORO</h1></a>
 	  </div>
 		 
 	  
 	 <div id="contenedorforo" th:style="|background-color: ${foro.color}|">
 		 
-	<div class="publicacion">
-		<div class="marco" th:style="|border-color: ${foro.color}|">
+	<div class="publicacion" style= "overflow: auto">
+		<div class="marco" th:style="|border-color: ${foro.color}| overflow: auto">
 		 <h2  th:text="${publicacion1.titulo.toUpperCase()}">RECICLAJE DE COLILLAS</h2>
-		 <h4 th:text="${publicacion1.texto}">Hola, quería saber como puedo hacer para reciclar mis colillas, ya que no quiero tiralas en la calle.</h4>
+		 <h4 th:text="${publicacion1.texto}" style="overflow-wrap: break-word;">Hola, quería saber como puedo hacer para reciclar mis colillas, ya que no quiero tiralas en la calle.</h4>
  	<p>Creador:</p><p th:text="${publicacion1.usuario.alias}">Fabricio</p> <p>Publicado:</p> <p th:text="${publicacion1.fecha}">26-02-2020</p>
 	  </div>
 		 </div>
@@ -57,9 +57,9 @@
 		 <h3> RESPUESTAS: </h3>
 		 </div>
 		 
-	<div class="respuesta"  th:each="respuesta: ${publicacion1.respuestas}">
-		<h4 th:text="${respuesta.texto}"> Creo que lo que deberías hacer es guardalas en botellas y crear ladrillos.</h4>
-		<p>Emisor:</p> <p th:text="${respuesta.usuario.alias}">Lucas</p><p>Publicada:</p> <p th:text="${respuesta.fecha}">28-02-2020</p>
+	<div class="respuesta"  th:each="respuesta: ${publicacion1.respuestas}" style="overflow: auto">
+		<h4 th:text="${respuesta.texto}" style="overflow-wrap: break-word;"> Creo que lo que deberías hacer es guardalas en botellas y crear ladrillos.</h4>
+		<p>Respondido por:</p> <p th:text="${respuesta.usuario.alias}">Lucas</p><p>Publicada:</p> <p th:text="${respuesta.fecha}">28-02-2020</p>
 		 </div>
 		 
 		 <div class="enviarrespuesta">

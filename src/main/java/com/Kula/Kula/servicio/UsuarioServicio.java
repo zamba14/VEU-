@@ -165,7 +165,7 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
     @Transactional
-    public Usuario agregarPreferencia(String idForo, String idUsuario){
+    public Usuario agregarPreferencia(String idForo, String idUsuario)throws ErrorServicio{
 
 
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
@@ -179,6 +179,6 @@ public class UsuarioServicio implements UserDetailsService {
             return usuario;
             }
         }
-        return null;
+        throw new ErrorServicio("Ya estaba en tus preferencias!");
     }
 }

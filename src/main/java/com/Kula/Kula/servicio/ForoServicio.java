@@ -37,7 +37,9 @@ public class ForoServicio {
         foro.setDescripcion(descripcion);
         foro.setTema(tema);
         foro.setPublicaciones(new ArrayList());
-        foro.setModerador(moderadores);
+        //foro.setModerador(moderadores);
+        //POR AHORA SIN MODERADORES
+        foro.setModerador(new ArrayList());
         foro.setColor(color);
         foro.setEstado(true);
 
