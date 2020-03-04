@@ -190,6 +190,7 @@ public class UsuarioServicio implements UserDetailsService {
     public Usuario agregarPreferencia(String idForo, String idUsuario) throws ErrorServicio {
 
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+
         Optional<Foro> foroRta = foroRepositorio.findById(idForo);
         if (respuesta.isPresent() && foroRta.isPresent()) {
             Usuario usuario = respuesta.get();
@@ -202,4 +203,6 @@ public class UsuarioServicio implements UserDetailsService {
         }
         throw new ErrorServicio("Ya estaba en tus preferencias!");
     }
+    
+    
 }

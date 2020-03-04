@@ -89,7 +89,7 @@
           <span th:if= "${usuario != null}"><img th:src=@{/foto/__${usuario.foto.id}__} style="width: 40px; height:40px; border-radius: 20px"/></span>
         </ul>
         
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
           <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
           <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
         </form>

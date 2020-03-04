@@ -213,6 +213,8 @@ public class PortalControlador {
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(foto,headers,HttpStatus.OK);
     }
+    
+    
  
    
 }

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+  <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
+
+    <title>Búsqueda</title>
+  </head>
+  <body>
+<div th:insert="index :: header"><div>
+
+    <div class="container">   
+
+        <div class="card" th:each="foro:${preferencia}">
+          <div class="card-header" th:text="${foro.tema.nombre}">
+              Violencia de género
+          </div>
+          <div class="card-body">
+            <a th:href="'/foro?idForo='+${foro.id}"><h5 class="card-title" th:text="${foro.titulo}">xNecesito ayuda para escapar</h5></a>
+            <p class="card-text" th:text="${foro.descripcion}">Sufro violencia y necesito irme de mi casa, ¿consejos?</p>
+            <span th:if="${!usuario.getPreferencia().contains(foro)}"><a th:href="'/agregarPreferencia?idForo='+${foro.id}+'&idUsuario='+${usuario.id}">Seguir este Foro</a></span>
+          </div>
+        </div>
+    
+        
+    
+      </div>
+
+      <div class="container" th:fragment="listapublicaciones"> 
+        <div class="card" th:each="publicacion:${foro.publicaciones}">
+          <div class="card-header">
+            <span><h3 th:text="'@'+${publicacion.usuario.alias}">Usuario</h3><img th:src=@{/foto/__${publicacion.usuario.foto.id}__} style="width: 30px; height:30px; border-radius: 15px"/></span>
+          </div>
+          <div class="card-body">
+            <a th:href="'/publicacion?idPublicacion='+${publicacion.id}"><h5 class="card-title" th:text="${publicacion.titulo}">Titulo de la publicacion</h5></a>
+            
+            <p class="card-text" th:text="${publicacion.fecha}">fecha</p>
+          </div>
+        </div>
+
+<div th:insert="index :: footer"></div>
+
+  </body>
+</html>
