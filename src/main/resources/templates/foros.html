@@ -45,7 +45,7 @@
       <div class="card-body">
         <a th:href="'/foro?idForo='+${foro.id}"><h5 class="card-title" th:text="${foro.titulo}">xNecesito ayuda para escapar</h5></a>
         <p class="card-text" th:text="${foro.descripcion}">Sufro violencia y necesito irme de mi casa, ¿consejos?</p>
-        <a th:href="'/agregarPreferencia?idForo='+${foro.id}+'&idUsuario='+${usuario.id}"> SEGUIR ESTE FORO</a>
+        <span th:if="${!usuario.getPreferencia().contains(foro)}"><a th:href="'/agregarPreferencia?idForo='+${foro.id}+'&idUsuario='+${usuario.id}">Seguir este Foro</a></span>
       </div>
     </div>
 

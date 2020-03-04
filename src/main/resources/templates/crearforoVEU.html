@@ -18,32 +18,35 @@
       <div class="container-fluid justify-content-center">
         <div class="row no-gutter justify-content-center">
 <div class="col-md-9 col-lg-8 mx-auto justify-content-center align-items-center">
-   <section class="mx-auto"  style="width: 800px; height: 300px;">
-    <form action="/crearForo" method="POST">
-      <div class="form-row" style="margin-bottom:20px">
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Titulo" name="titulo">
-        </div>
-        <div class="col">
-          
-            <select type="text" class="form-control" placeholder="Categoria/Tema" name="tema">
-          
-          <option  th:each="categoria: ${T(com.Kula.Kula.enumeracion.Categoria).values()}" th:text="${categoria.nombre}" th:value="${categoria}" class="form-control" placeholder="Categoria/Tema"></option>
-          </select>
-        </div>
+   <section class="mx-auto"  style="width: 70%; height: auto;">
+
+    <form>
+      <div class="form-group" action="/crearForo" method="POST">
+        <label for="exampleInputEmail1">Nombre de Foro</label>
+        <input type="email" class="form-control" name="titulo" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
       </div>
-      <!-- <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Descripcion</span>
-        </div>
-        <textarea class="form-control" aria-label="With textarea"></textarea>
-      </div> -->
-      <div class="enviarrespuesta">
-        <textarea id="text" placeholder="Descripcion" name="descripcion"></textarea>
-       </div>
-      <button type="button" class="btn btn-outline-secondary "><input type="color" name="color">Elegir color para el Foro</button>
-      <button type="submit" class="btn btn-outline-dark">Crear Foro</button>
+      <div class="form-group">
+        <select title="Categoria" name="tema">
+          <option selected disabled >Categoría
+          </option>
+          <option th:each="categoria: ${T(com.Kula.Kula.enumeracion.Categoria).values()}" th:text="${categoria.nombre}" th:value="${categoria}" class="form-control">Violencia de Genero</option>
+
+      </select>
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <textarea type="text" class="form-control" id="descripcion" name="descripcion"></textarea>
+      </div>
+      <div class="form-group form-check">
+        <button type="button" class="btn btn-outline-secondary"><input type="color" name="color">Elegir color para el Foro</button>
+      </div>
+      <button type="submit" class="btn btn-dark btn-dark2 ">Crear Foro</button>
     </form>
+
+
+
+ 
    </section>
   </div>
 </div>
@@ -51,7 +54,7 @@
 </div>
 </div>
 
-   <div th:insert="index :: footer">
+
 
   </div>  
     <!-- Optional JavaScript -->

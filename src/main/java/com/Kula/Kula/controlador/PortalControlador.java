@@ -8,6 +8,7 @@ import com.Kula.Kula.entidad.Usuario;
 import com.Kula.Kula.enumeracion.Categoria;
 import com.Kula.Kula.error.ErrorServicio;
 import com.Kula.Kula.repositorio.ForoRepositorio;
+import com.Kula.Kula.repositorio.FotoRepositorio;
 import com.Kula.Kula.repositorio.PublicacionRepositorio;
 import com.Kula.Kula.repositorio.UsuarioRepositorio;
 import com.Kula.Kula.servicio.ForoServicio;
@@ -18,10 +19,15 @@ import java.util.List;
 //import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +52,8 @@ public class PortalControlador {
     PublicacionServicio publicacionServicio;
     @Autowired
     PublicacionRepositorio publicacionRepositorio;
+    @Autowired
+    FotoRepositorio fotoRepositorio;
 
     @GetMapping("/")
     public String inicio(HttpSession sesion, ModelMap modelo) {
@@ -198,6 +206,13 @@ public class PortalControlador {
         return "/error.html";
     }
     
+    @GetMapping("/foto/{id}")
+    public ResponseEntity<byte[]> foto(@PathVariable("id") String id){
+        byte[] foto = fotoRepositorio.findById(id).get().getContenido();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<>(foto,headers,HttpStatus.OK);
+    }
  
    
 }

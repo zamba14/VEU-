@@ -5,13 +5,15 @@ import com.Kula.Kula.entidad.Foto;
 import com.Kula.Kula.entidad.Usuario;
 import com.Kula.Kula.error.ErrorServicio;
 import com.Kula.Kula.repositorio.ForoRepositorio;
+import com.Kula.Kula.repositorio.FotoRepositorio;
 import com.Kula.Kula.repositorio.UsuarioRepositorio;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-import org.hibernate.Hibernate;
+//import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,6 +39,8 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private FotoServicio fotoServicio;
+    @Autowired
+    private FotoRepositorio fotoRepositorio;
 
     @Autowired
     private ForoRepositorio foroRepositorio;
@@ -58,7 +62,15 @@ public class UsuarioServicio implements UserDetailsService {
             if (archivo != null) {
                 Foto foto = fotoServicio.guardar(archivo);
                 usuario.setFoto(foto);
+            } else {
+                Foto foto = fotoRepositorio.getOne("1a0a0a91-7f5a-4ff6-87af-2b7cdbb60854");
+                usuario.setFoto(foto);
             }
+//                
+//                File file = new File("/img/iconoUsuario.png");
+//                file.
+//                
+//            }
             usuario.setEstado(true);
             usuario.setPreferencia(new ArrayList());
 

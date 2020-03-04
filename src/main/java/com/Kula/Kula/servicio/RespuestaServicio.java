@@ -85,16 +85,16 @@ public class RespuestaServicio {
         }
     }
 
-    private String truncar(String texto) {
-        System.out.println(texto.length());
-        if (texto.length() > 200) {
-            texto = texto.substring(0, 199);
-            System.out.println("se activo");
-            System.out.println(texto.length());
-        }
-        
-        return texto;
-    }
+//    private String truncar(String texto) {
+//        System.out.println(texto.length());
+//        if (texto.length() > 200) {
+//            texto = texto.substring(0, 199);
+//            System.out.println("se activo");
+//            System.out.println(texto.length());
+//        }
+//        
+//        return texto;
+//    }
     
    
 }

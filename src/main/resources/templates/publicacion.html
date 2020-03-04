@@ -48,7 +48,7 @@
 		<div class="marco" th:style="|border-color: ${foro.color}|" style="overflow: auto">
 		 <h2  th:text="${publicacion1.titulo.toUpperCase()}">RECICLAJE DE COLILLAS</h2>
 		 <h4 th:text="${publicacion1.texto}" style="overflow-wrap: break-word;">Hola, quería saber como puedo hacer para reciclar mis colillas, ya que no quiero tiralas en la calle.</h4>
- 	<p>Creador:</p><p th:text="${publicacion1.usuario.alias}">Fabricio</p> <p>Publicado:</p> <p th:text="${publicacion1.fecha}">26-02-2020</p>
+ 	<p>Creador:</p><p th:text="${publicacion1.usuario.alias}">Fabricio</p> <img th:src=@{/foto/__${publicacion1.usuario.foto.id}__} style="width: 40px; height:40px; border-radius: 20px"/> <p>Publicado:</p> <p th:text="${publicacion1.fecha}">26-02-2020</p>
 	  </div>
 		 </div>
 		 
@@ -59,7 +59,7 @@
 		 
 	<div class="respuesta"  th:each="respuesta: ${publicacion1.respuestas}" style="overflow: auto">
 		<h4 th:text="${respuesta.texto}" style="overflow-wrap: break-word;"> Creo que lo que deberías hacer es guardalas en botellas y crear ladrillos.</h4>
-		<p>Respondido por:</p> <p th:text="${respuesta.usuario.alias}">Lucas</p><p>Publicada:</p> <p th:text="${respuesta.fecha}">28-02-2020</p>
+		<p>Respondido por:</p> <p th:text="${respuesta.usuario.alias}">Lucas</p><img th:src=@{/foto/__${respuesta.usuario.foto.id}__} style="width: 40px; height:40px; border-radius: 20px"/><p>Publicada:</p> <p th:text="${respuesta.fecha}">28-02-2020</p>
 		 </div>
 		 
 		 <div class="enviarrespuesta">

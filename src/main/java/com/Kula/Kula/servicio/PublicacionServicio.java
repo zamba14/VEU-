@@ -68,6 +68,7 @@ public class PublicacionServicio {
     @Transactional
     public void eliminarPublicacion(String idPublicacion, List<Usuario> moderadores, Usuario usuario) throws ErrorServicio {
         Optional<Publicacion> localizar = publicacionRepositorio.findById(idPublicacion);
+ 
         if (localizar.isPresent()) {
             Publicacion publicacion = localizar.get();
             publicacion.setEstado(false);

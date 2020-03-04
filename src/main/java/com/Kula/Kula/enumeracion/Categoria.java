@@ -5,6 +5,8 @@ package com.Kula.Kula.enumeracion;
     
 public enum Categoria{
     Violencia_de_genero("Violencia de Género"),
+    Violencia("Violencia"),
+    Bullying("Bullying"),
     Maltrato_infantil("Maltrato Infantil"),
     Educacion("Educación"),
     Maltrato_animal("Maltrato Animal"),

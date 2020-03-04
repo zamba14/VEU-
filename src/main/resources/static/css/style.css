@@ -9,6 +9,13 @@ body{
 
 /***FOROS****/
 
+
+.btn-dark2{
+      margin-left: 45%;
+background-color: #ffc107;
+color: #000000;
+    }
+
 .card{
 	width: 70%;
 	margin-left: 15%;
@@ -213,7 +220,7 @@ width: 100%;
 height: auto;
 position: absolute;
 margin-top: 20px;
-padding: 0;
+padding: 0px;
 
 }
 

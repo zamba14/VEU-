@@ -70,7 +70,7 @@
                         
                         <div class="modal-body">
                           
-                          <form action="/registro" method="POST" enctype="multipart/form-data">
+                          <form action="/registro" method="POST" onsubmit="validar()" enctype="multipart/form-data">
                             
                             <div class="input-group mb-3">
                               <div class="input-group mb-3">
@@ -101,7 +101,7 @@
                           
                         </div>
                         <div class="modal-footer">
-                          <button type="submit" class="btn btn-outline-warning" onClick="validar()">Registrarme</button>
+                          <button type="submit" class="btn btn-outline-warning">Registrarme</button>
                           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
                           
                         </div>
@@ -135,18 +135,19 @@
 
   <script type="text/javascript">
     function validar(){
-  var clave = document.getElementById("clave").value;
-  var claveBis = document.getElementById("claveBis").value;
-  
+      var claveBis = document.getElementById("claveBis");
+      claveBis.addEventListener("input",function(event){
+  var clave = document.getElementById("clave");
+  console.log(clave);
+  var claveBis = document.getElementById("claveBis");
+  console.log(claveBis);
   if (clave != claveBis) {
     
-    
-    alert("Las Contraseñas deben coincidir");
-    return false;
+    claveBis.setCustomValidity("Las claves no coinciden");
     
   } else {
     
-    return true;
+    claveBis.setCustomValidity("")
    
   }
 }
