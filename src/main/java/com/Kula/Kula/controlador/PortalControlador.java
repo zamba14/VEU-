@@ -11,6 +11,7 @@ import com.Kula.Kula.repositorio.ForoRepositorio;
 import com.Kula.Kula.repositorio.FotoRepositorio;
 import com.Kula.Kula.repositorio.PublicacionRepositorio;
 import com.Kula.Kula.repositorio.UsuarioRepositorio;
+import com.Kula.Kula.servicio.Busqueda;
 import com.Kula.Kula.servicio.ForoServicio;
 import com.Kula.Kula.servicio.PublicacionServicio;
 import com.Kula.Kula.servicio.UsuarioServicio;
@@ -54,6 +55,8 @@ public class PortalControlador {
     PublicacionRepositorio publicacionRepositorio;
     @Autowired
     FotoRepositorio fotoRepositorio;
+    @Autowired
+    Busqueda busqueda;
 
     @GetMapping("/")
     public String inicio(HttpSession sesion, ModelMap modelo) {
@@ -212,6 +215,27 @@ public class PortalControlador {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(foto,headers,HttpStatus.OK);
+    }
+    
+    @GetMapping("/contacto")
+    public String contacto(){
+        return "/contacto.html";
+    }
+    @GetMapping("/quienessomos")
+    public String quienesSomos(){
+        return "quienessomos.html";
+    }
+    
+    @GetMapping("/perfil")
+    public String perfil(){
+        return "perfil.html";
+    }
+    
+    @PostMapping("/search")
+    public String Busqueda(ModelMap modelo, String texto){
+        modelo.put("busqForo", busqueda.busquedaForo(texto));
+        modelo.put("busqPubl", busqueda.busquedaPublicacion(texto));
+        return "/busqueda";
     }
     
     

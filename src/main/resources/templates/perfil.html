@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+
+    <link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
+
+	  
+	  
+    <title>PERFIL</title>
+  </head>
+  <body>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	
+
+	  <header class="cabeza"></header>
+    
+	  
+	 <header th:insert="index :: header">
+    
+  </header>
+	  
+	  <section>
+
+		  
+		  <div class="cabe">
+		  </div>
+		  
+		  
+		  
+<div class="container bootstrap snippets">
+    <div class="row" id="user-profile">
+        <div class="col-lg-3 col-md-4 col-sm-4">
+            <div class="main-box clearfix">
+                <h2 th:text="${usuario.alias}">Soledad</h2>
+                <div class="profile-status">
+                    <i class="fa fa-check-circle"></i> Online
+                </div>
+                <img th:src=@{/foto/__${usuario.foto.id}__} alt="" class="profile-img img-responsive center-block" width="215px" height="auto">
+                <div class="profile-label">
+                    <span class="label label-danger">Usuario</span>
+                </div>
+
+
+                <div class="profile-since" th:text="${usuario.mail}">
+                    Miembro desde: 20-02-2020
+                </div>
+
+                <div class="profile-details">
+                    <ul class="fa-ul">
+                        <li><i class="fa-li fa fa-tasks"></i>Foros <span>45</span></li>
+                        <li><i class="fa-li fa fa-comment"></i>Respuestas: <span>8</span></li>
+                    </ul>
+                </div>
+
+                <div class="profile-message-btn center-block text-center">
+                    <a href="#" class="btn btn-warning">
+                        <i class="fa fa-envelope"></i> Enviar mensaje
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-8 col-sm-8">
+            <div class="main-box clearfix">
+                <div class="profile-header">
+                    <h3><span>Info del usuario</span></h3>
+                    <a href="#" class="btn btn-warning edit-profile">
+                        <i class="fa fa-pencil-square fa-lg"></i> Editar perfil
+                    </a>
+                </div>
+
+                <div class="row profile-user-info">
+                    <div class="col-sm-8">
+                        <div class="profile-user-details clearfix">
+                            <div class="profile-user-details-label">
+                                Alias
+                            </div>
+                            <div class="profile-user-details-value" th:text="${usuario.alias}">
+                                Soledad420
+                            </div>
+                        </div>
+   
+                        
+                        <div class="profile-user-details clearfix">
+                            <div class="profile-user-details-label">
+                                Email
+                            </div>
+                            <div class="profile-user-details-value" th:text="${usuario.mail}">
+                                Sole@gmail.com
+                            </div>
+                        </div>
+                       
+                    </div>
+                  <!--  <div class="col-sm-4 profile-social">
+                        <ul class="fa-ul">
+                            <li><i class="fa-li fa fa-twitter-square"></i><a href="#">@scjohansson</a></li>
+                            <li><i class="fa-li fa fa-linkedin-square"></i><a href="#">John Doe </a></li>
+                            <li><i class="fa-li fa fa-facebook-square"></i><a href="#">John Doe </a></li>
+                            <li><i class="fa-li fa fa-skype"></i><a href="#">Black_widow</a></li>
+                            <li><i class="fa-li fa fa-instagram"></i><a href="#">Avenger_Scarlett</a></li>
+                        </ul> 
+                    </div> -->
+                </div>
+				
+				<section>
+
+                <div class="tabs-wrapper profile-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab-activity" data-toggle="tab">Actividad</a></li>
+                        <li><a href="#tab-friends" data-toggle="tab">  Foros</a></li>
+                        
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab-activity">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="fa fa-comment"></i>
+                                            </td>
+                                            <td>
+                                                Soledad comentó en la publicación <a href="#">Bullying</a> 
+                                            </td>
+                                            <td>
+                                                02/02/2020 12:30
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="fa fa-comment"></i>
+                                            </td>
+                                            <td>
+                                             Soledad comentó en la publicación <a href="#">Violencia de género</a> 
+
+                                            </td>
+                                            <td>
+                                                02/02/2020 12:30
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="fa fa-check"></i>
+                                            </td>
+                                            <td>
+                                                Soledad creó una publicación <a href="#">Cambio climático</a> 
+                                            </td>
+                                            <td>
+                                                28/02/2020 15:32
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="fa fa-comment"></i>
+                                            </td>
+                                            <td>
+                                                Soledad comentó en la publicación <a href="#">Coronavirus</a>
+                                            <td>
+                                               23/02/2020 19:20
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="tab-friends">
+			
+							
+							
+ <div th:insert=foros :: listaforos>
+
+ 
+</div>
+
+	  
+	  
+                     
+                                                </div>
+                                            </div>
+                                            
+                                               
+                                            </div> 
+                                           
+                                       </div>
+                    </div>
+
+       
+    
+</div>
+	
+	</section>
+	  
+	  <div th:insert="index :: footer"></div>
+	  
+  </body>
+</html>

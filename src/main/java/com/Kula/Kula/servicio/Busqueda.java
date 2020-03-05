@@ -32,7 +32,7 @@ public class Busqueda {
         if (!(texto == null || texto.isEmpty())) {
 
             foro = foroRepo.buscarPorDescripcion(texto);
-            foro.addAll(foroRepo.buscarPorTitulo(texto));
+            foro.containsAll(foroRepo.buscarPorTitulo(texto));
 
         }  return foro;
        
@@ -43,7 +43,7 @@ public class Busqueda {
         if (!(texto == null || texto.isEmpty())) {
 
             publicacion = publicacionRepo.buscarPorTexto(texto);
-            publicacion.addAll(publicacionRepo.buscarPorTitulo(texto));
+            publicacion.containsAll(publicacionRepo.buscarPorTitulo(texto));
 
         }
         return publicacion;

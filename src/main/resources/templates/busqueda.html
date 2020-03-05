@@ -4,7 +4,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	  	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+      <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+      <link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
 
 
     <!-- Bootstrap CSS -->
@@ -15,11 +16,18 @@
     <title>Búsqueda</title>
   </head>
   <body>
-<div th:insert="index :: header"><div>
+    
+<div th:insert="index :: header"></div>
+<section>
+<br>
+<br>
+<br>
+<br>
+
 
     <div class="container">   
 
-        <div class="card" th:each="foro:${preferencia}">
+        <div class="card" th:each="foro:${busqForo}">
           <div class="card-header" th:text="${foro.tema.nombre}">
               Violencia de género
           </div>
@@ -34,17 +42,19 @@
     
       </div>
 
-      <div class="container" th:fragment="listapublicaciones"> 
-        <div class="card" th:each="publicacion:${foro.publicaciones}">
+      <div class="container"> 
+        <div class="card" th:each="publicacion:${busqPubl}">
           <div class="card-header">
             <span><h3 th:text="'@'+${publicacion.usuario.alias}">Usuario</h3><img th:src=@{/foto/__${publicacion.usuario.foto.id}__} style="width: 30px; height:30px; border-radius: 15px"/></span>
           </div>
           <div class="card-body">
-            <a th:href="'/publicacion?idPublicacion='+${publicacion.id}"><h5 class="card-title" th:text="${publicacion.titulo}">Titulo de la publicacion</h5></a>
+            <a th:href="'/publicacion?idPublicacion='+${publicacion.id}" style="text-decoration: none; color:black"><h5 class="card-title" th:text="${publicacion.titulo}">Titulo de la publicacion</h5></a>
             
             <p class="card-text" th:text="${publicacion.fecha}">fecha</p>
           </div>
         </div>
+      </section>
+    </div>
 
 <div th:insert="index :: footer"></div>
 

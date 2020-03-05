@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 
-
+  <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
     <title>VEU! - Foro</title>
   </head>
   <body>
@@ -26,9 +26,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
 	    <header th:insert="index :: header"></header>
-    <br/>
-    <br/>
-    <br/>
+    <br>
+    <br>
+    <br>
 	  
 	 
 	  
@@ -43,25 +43,50 @@
 		 
 	  
 	 <div id="contenedorforo" th:style="|background-color: ${foro.color}|">
-		 
-	<div class="publicacion" style= "overflow: auto">
-		<div class="marco" th:style="|border-color: ${foro.color}|" style="overflow: auto">
-		 <h2  th:text="${publicacion1.titulo.toUpperCase()}">RECICLAJE DE COLILLAS</h2>
-		 <h4 th:text="${publicacion1.texto}" style="overflow-wrap: break-word;">Hola, quería saber como puedo hacer para reciclar mis colillas, ya que no quiero tiralas en la calle.</h4>
- 	<p>Creador:</p><p th:text="${publicacion1.usuario.alias}">Fabricio</p> <img th:src=@{/foto/__${publicacion1.usuario.foto.id}__} style="width: 40px; height:40px; border-radius: 20px"/> <p>Publicado:</p> <p th:text="${publicacion1.fecha}">26-02-2020</p>
-	  </div>
-		 </div>
-		 
-		 
-	<div class="resp">
-		 <h3> RESPUESTAS: </h3>
-		 </div>
-		 
-	<div class="respuesta"  th:each="respuesta: ${publicacion1.respuestas}" style="overflow: auto">
-		<h4 th:text="${respuesta.texto}" style="overflow-wrap: break-word;"> Creo que lo que deberías hacer es guardalas en botellas y crear ladrillos.</h4>
-		<p>Respondido por:</p> <p th:text="${respuesta.usuario.alias}">Lucas</p><img th:src=@{/foto/__${respuesta.usuario.foto.id}__} style="width: 40px; height:40px; border-radius: 20px"/><p>Publicada:</p> <p th:text="${respuesta.fecha}">28-02-2020</p>
-		 </div>
-		 
+     
+    <div class="card text-center ">
+      <div class="container">
+      <div class="card-header bg-light row">
+        <div class="col-6">
+      <p th:text="'Usuario: '+${publicacion1.usuario.alias}"> Usuario: Fabricio </p>
+        </div>
+      <div class="col-6"> 
+      <img  th:src=@{/foto/__${publicacion1.usuario.foto.id}__} style="width: 30px; height:30px; border-radius: 15px; float: right"/>
+      </div>
+      </div>
+		
+      <div class="card-body">
+        <h5 class="card-title" th:text="${publicacion1.titulo.toUpperCase()}">COLILLAS DE CIGARRILLOS</h5>
+        <p class="card-text" th:text="${publicacion1.texto}">No quiero tirar mis colillas en la calle, qué debería hacer con ellas?</p>
+        
+      </div>
+      <div class="card-footer text-muted" th:text="${publicacion1.fecha}">
+       20-02-2020 a las 13:30
+      </div>
+    </div>
+  </div>
+
+    <div class="card text-center " th:each="respuesta: ${publicacion1.respuestas}">
+    <div class="container">
+      <div class="card-header bg-light row">
+        <div class="col-6">
+        <p th:text="'Usuario: '+${respuesta.usuario.alias}">Usuario: Celeste </p>
+        </div>
+      <div class="col-6">
+        <img  th:src=@{/foto/__${respuesta.usuario.foto.id}__} style="width: 30px; height:30px; border-radius: 15px; float:right"/>
+      </div>
+    </div>
+      <div class="card-body">
+        <p class="card-text" th:text="${respuesta.texto}">Creo que lo que deberías hacer es guardarlas en botellas y reciclarlas.</p>
+        
+      </div>
+      <div class="card-footer text-muted" th:text="${respuesta.fecha}">
+       20-02-2020 a las 16:00
+      </div>
+    </div>
+  </div>
+
+		 <div class="card text-center" style="background-color: transparent">
 		 <div class="enviarrespuesta">
      <form action="/crearRta" method="POST">
       <textarea id="text" name="texto" placeholder="Escribir una respuesta"></textarea>
@@ -70,17 +95,16 @@
       <div class="enviar">
         <input type="submit" value="ENVIAR">
         </div>
+      </div>
       
     </form> 
     </div>
-		 
+  </div>
 		  
-     </div>
+    
 	  
-	  <div class="footer">
-    <footer>
-     <p> TODOS LOS DERECHOS RESERVADOS A VEU</p>
-    </footer>
+	  <div th:insert="index :: footer">
+
   </div>  
 	  
 </body>

@@ -4,7 +4,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	  	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+      <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+      <link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
 
 
     <!-- Bootstrap CSS -->
@@ -46,9 +47,9 @@
               Nosotros
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="#">Quienes somos</a>
+				<a class="dropdown-item" href="/quienessomos">Quienes somos</a>
 				<div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Contacto</a>
+              <a class="dropdown-item" href="/contacto">Contacto</a>
 				 
             </div>
           </li>
@@ -74,12 +75,9 @@
 				
 				
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Ver mi perfil</a>
+              <a class="dropdown-item" href="/perfil">Ver mi perfil</a>
 				<div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Configurar perfil</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Historial</a>
-              <div class="dropdown-divider"></div>
+       
             <a class="dropdown-item" href="/logout">Cerrar Sesión</a>
             </div>
             
@@ -90,8 +88,8 @@
         </ul>
         
         <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
-          <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
-          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+          <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" name="texto">
+          <button class="btn btn-light my-2 my-sm-0" type="submit">Buscar</button>
         </form>
       </div>
     </nav>
@@ -117,7 +115,7 @@
   <span class="sr-only">Next</span>
 </a>
 </div>
-        </section>
+        
         <br>
         <div class="crear">
           <a href="/explorar"><h1>Explorá todos los foros!</h1></a>
@@ -126,11 +124,12 @@
 
     <div th:insert="foros :: listaforos"> </div>  
 	
-	  
+
+
 	<div class="footer" th:fragment="footer">
     <footer>
-     <p> TODOS LOS DERECHOS RESERVADOS A VEU</p>
-    </footer>
+      <p> TODOS LOS DERECHOS RESERVADOS A VEU</p>
+     </footer>
   </div>  
 	  
 	  

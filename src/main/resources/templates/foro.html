@@ -5,15 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	  	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+	  <link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
+
+
 
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 
-    <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
-
-    <title th:text="${foro.titulo}">VEU!</title>
+  <link rel="shortcut icon" href="img/isotipo.png" type="image/x-icon">
+    <title th:text="${foro.titulo}">FORO</title>
   </head>
   <body>
     
@@ -23,58 +25,90 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
-
-	
+	    <header class="cabeza"></header>
     
 	  
-	 <header th:insert="index :: header">...</header>
-    <br/>
-    <br/>
-    <br/>
+	 <header th:insert="index :: header">
+   
+  </header>
+	  
+	  
+	 <div class="crear">
+	  <a href="/crearforo"><h1>CREÁ TU FORO</h1></a>
+	  </div>
+	  
 
-    <section th:style="|background-color: ${foro.color}|">
-      <div class="card" >
-        <h4 class="card-title" th:text="${foro.titulo}">Título del Foro</h4>
-        <span th:if="${!usuario.getPreferencia().contains(foro)}"><a th:href="'/agregarPreferencia?idForo='+${foro.id}+'&idUsuario='+${usuario.id}">Seguir este Foro</a></span>
-       
-        
+	  
+	  <div class="cuerpoforo" th:style="|background-color: ${foro.color}|">
+
+      <div class="card text-center border-info">
+	  	<div class="encabezadoforo" th:text="${foro.titulo}">
+		  <h2>ASUNTOS EDUCATIVOS<h2>
+      <a href="'/agregarPreferencia?idForo='+${foro.id}+'&idUsuario='+${usuario.id}" style="text-decoration:none; color:black">Seguir foro</a>
       </div>
+      </div>
+	  
+      
+
+      <div class="card text-center border-info" th:fragment="nuevoPost">
+        <div class="card-body">
+           
+          <h1>CREÁ TU PUBLICACIÓN</h1>
+            
+            <form action="/crearPost" method="POST">
+                
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Escriba un título</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="titulo">
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Escriba un texto</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="texto"></textarea>
+                </div>
+
+                <input type="hidden" name="idForo" th:value="${foro.id}">
+
+
+                <div class="row justify-content-center">
+                  <button type="submit" class="btn btn-light">Enviar</button>
+                </div>
+                
         </div>
-        <br/>
-
-        <div th:insert="forms :: nuevoPost">...</div>
+      </div>  
 
 
-   
 
-
-   
-
-    </div>          
-    <div class="container" th:fragment="listapublicaciones"> 
-    <div class="card" th:each="publicacion:${foro.publicaciones}">
-      <div class="card-header">
-        <span><h3 th:text="'@'+${publicacion.usuario.alias}">Usuario</h3><img th:src=@{/foto/__${publicacion.usuario.foto.id}__} style="width: 30px; height:30px; border-radius: 15px"/></span>
-      </div>
-      <div class="card-body">
-        <a th:href="'/publicacion?idPublicacion='+${publicacion.id}"><h5 class="card-title" th:text="${publicacion.titulo}">Titulo de la publicacion</h5></a>
+      
+      <div class="card text-center " th:each="publicacion:${foro.publicaciones}">
+        <div class="container">
+        <div class="card-header bg-light row">
+          <div  class="col-6" >
+          <p th:text="'Usuario: '+${publicacion.usuario.alias}"  float="left"> Usuario: Fabricio </p>
+        </div>
+        <div class="col-6">
+          <img  th:if="${publicacion.usuario.foto != null}" th:src=@{/foto/__${publicacion.usuario.foto.id}__} style="width:30px; height:30px; border-radius:15px; float:right;">
+        </div>
+        </div>
+      
         
-        <p class="card-text" th:text="${publicacion.fecha}">fecha</p>
-      </div>
-    </div>
-    
+        <div class="card-body">
+          <a th:href="'/publicacion?idPublicacion='+${publicacion.id}" style="text-decoration: none; color: black"><h5 class="card-title" th:text="${publicacion.titulo}">COLILLAS DE CIGARRILLOS</h5></a>
+          <p class="card-text" th:text="${publicacion.texto}">No quiero tirar mis colillas en la calle, qué debería hacer con ellas?</p>
+          
+        
 
+        </div>
+
+	  </div>
   </div>
-</div>  
-	
+	  </div>
+  
 	  
-	<div class="footer">
-    <footer>
-     <p> TODOS LOS DERECHOS RESERVADOS A VEU</p>
-    </footer>
+	  
+	  <div th:insert="index :: footer">
+   
   </div>  
 	  
-	  
-</section>
-  </body>
+</body>
 </html>
